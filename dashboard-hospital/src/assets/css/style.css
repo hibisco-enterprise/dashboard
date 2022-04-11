@@ -30,11 +30,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 73px - 73px);
+    height: calc(100vh - 49px - 49px);
 }
 
 .card {
-    padding: 32px 24px;
+    padding: 24px 24px;
     background: white;
     box-shadow: 0px 7px 30px rgba(43, 37, 63, 0.25);
     border-radius: 2px;
@@ -70,9 +70,6 @@ a {
     width: 352px;
 }
 
-#txtPasswordLogin {
-    margin-bottom: 128px;
-}
 
 .button {
     background: #8060F3;
@@ -80,7 +77,7 @@ a {
     color: white;
     font-weight: 500;
     font-size: 16px;
-    height: 40px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,6 +85,8 @@ a {
 }
 
 #btnLogin {
+    height: 40px;
+    margin-top: 112px;
     margin-bottom: 20px;
 }
 
@@ -102,4 +101,39 @@ a {
     font-weight: 600;
     color: #F9361B;
     cursor: pointer;
+}
+
+@media (max-height: 700px) {
+    .inicialBar{
+        height: 48px;
+    }
+
+    .card h1{
+        font-size: 24px;
+    }
+
+    .input{
+        margin-bottom: 8px;
+    }
+
+    .input label{
+        font-size: 16px;
+    }
+
+    .input input{
+        font-size: 12px;
+        width: 288px;
+    }
+
+    .button {
+        font-size: 14px;
+    }
+
+    #btnLogin{
+        margin-top: 104px;
+    }
+
+    .card p{
+        font-size: 14px;
+    }
 }
