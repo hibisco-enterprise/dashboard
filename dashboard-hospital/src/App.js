@@ -1,11 +1,14 @@
-import './App.css'
+import React from "react"
+import Login from "./pages/Login"
+
+import './assets/css/reset.css';
+import './assets/css/style.css';
 
 function App() {
-    return (
-        <div className="App">
-            <h1>Hello Gabriel!</h1>
-        </div>
-    )
+    return ( <>
+        <Login/>
+        </>
+    );
 }
 
-export default App
+export default App;
