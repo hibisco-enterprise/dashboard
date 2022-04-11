@@ -1,0 +1,105 @@
+html {
+    font-family: 'Outfit', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.inicialBar {
+    display: flex;
+    align-items: center;
+    height: 72px;
+    padding-left: 64px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.topBar {
+    border-bottom: 1px solid rgba(249, 54, 27, 0.4);
+}
+
+.bottomBar {
+    border-top: 1px solid rgba(249, 54, 27, 0.4);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 73px - 73px);
+}
+
+.card {
+    padding: 32px 24px;
+    background: white;
+    box-shadow: 0px 7px 30px rgba(43, 37, 63, 0.25);
+    border-radius: 2px;
+}
+
+.card h1 {
+    font-weight: 500;
+    font-size: 32px;
+    color: #343A40;
+    margin-bottom: 24px;
+}
+
+.input {
+    margin-bottom: 16px;
+}
+
+.input label {
+    font-weight: 500;
+    font-size: 20px;
+    color: #495057;
+    margin-bottom: 4px;
+    line-height: 125%;
+}
+
+.input input {
+    outline: none;
+    padding: 0 12px;
+    border: 0.5px solid #7B7B7B;
+    height: 32px;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 16px;
+    width: 352px;
+}
+
+#txtPasswordLogin {
+    margin-bottom: 128px;
+}
+
+.button {
+    background: #8060F3;
+    border-radius: 2px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#btnLogin {
+    margin-bottom: 20px;
+}
+
+.card p {
+    text-align: center;
+    font-size: 16px;
+    line-height: 150%;
+    color: #343A40;
+}
+
+.card a {
+    font-weight: 600;
+    color: #F9361B;
+    cursor: pointer;
+}
