@@ -11,6 +11,7 @@ a {
     align-items: center;
     height: 72px;
     padding-left: 64px;
+    z-index: 999 !important;
 }
 
 .title {
@@ -30,11 +31,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 49px - 49px);
+    height: calc(100vh - 73px - 73px);
 }
 
 .card {
-    padding: 24px 24px;
+    padding: 32px 24px;
     background: white;
     box-shadow: 0px 7px 30px rgba(43, 37, 63, 0.25);
     border-radius: 2px;
@@ -103,9 +104,50 @@ a {
     cursor: pointer;
 }
 
-@media (max-height: 700px) {
+.card .horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.card .horizontal h1{
+    margin-bottom: 0;
+}
+
+.steps{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.steps .step{
+    border-radius: 100px;
+    margin-left: 6px;
+    height: 12px;
+    width: 12px;
+    background-color: rgba(249, 54, 27, 0.6);
+}
+
+.steps .currentStep{
+    width: 24px;
+    background-color: #F9361B;
+}
+
+#btnNextSignUpStep1{
+    height: 40px;
+    margin-top: 32px;
+    margin-bottom: 20px;
+}
+
+/* @media (max-height: 700px) {
     .inicialBar{
         height: 48px;
+    }
+
+    .container{
+        height: calc(100vh - 49px - 49px);
     }
 
     .card h1{
@@ -136,4 +178,4 @@ a {
     .card p{
         font-size: 14px;
     }
-}
+} */
