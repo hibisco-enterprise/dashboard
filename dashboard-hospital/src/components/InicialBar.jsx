@@ -10,4 +10,12 @@ function TopBar() {
     );
 }
 
-export default TopBar;
+function BottomBar() {
+    return(
+        <>
+            <div className="inicialBar bottomBar"/>
+        </>
+    );
+}
+
+export {TopBar, BottomBar};

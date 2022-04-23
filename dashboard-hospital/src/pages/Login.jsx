@@ -1,8 +1,7 @@
 import React from "react";
-import BottomBar from "../components/BottomBar";
-import TopBar from "../components/TopBar";
-import CardInput from "../components/CardInput";
-import CardButton from "../components/CardButton";
+import {TopBar, BottomBar} from "../components/InicialBar";
+import CardInput from "../components/Input";
+import CardButton from "../components/Button";
 
 function Login(){
     return(
