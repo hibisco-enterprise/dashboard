@@ -1,7 +1,7 @@
 import React from "react";
-import useNavigate from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {TopBar, BottomBar} from "../components/InicialBar";
-import CardInput from "../components/Input";
+import {CardInput} from "../components/Input";
 import CardButton from "../components/Button";
 
 function Login(){
@@ -19,15 +19,17 @@ function Login(){
                         id="txtEmailLogin"
                         label="Email"
                         placeholder="Digite seu email..."
+                        type="email"
                     />
                     <CardInput
                         id="txtPasswordLogin"
                         label="Senha"
                         placeholder="Digite sua senha..."
+                        type="password"
                     />
                     <CardButton label="Entrar" id="btnLogin"/>
                     <p>Não possui uma conta?</p>
-                    <p><a onClick={navigate("/signup")}>Criar uma conta</a></p>
+                    <p><a onClick={() => navigate("/signup")}>Criar uma conta</a></p>
                 </div>
             </div>
 

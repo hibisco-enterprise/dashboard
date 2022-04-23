@@ -4,6 +4,7 @@ html {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 .inicialBar {
@@ -101,7 +102,6 @@ a {
 .card a {
     font-weight: 600;
     color: #F9361B;
-    cursor: pointer;
 }
 
 .card .horizontal{
