@@ -14,4 +14,22 @@ function CardInput(props) {
     );
 }
 
-export {CardInput};
+function CardSelect(props) {
+
+    const [value, setValue] = useState("");
+
+    return(
+        <>
+        <div className="input">
+            <label htmlFor={props.id}>{props.label}</label><br/>
+            <select id={props.id} onChange={e => setValue(e.target.value)} value={props.value}>
+                {props.options.map((type)=>(
+                    <option value={type}>{type}</option>
+                ))}
+            </select>
+        </div>
+        </>
+    );
+}
+
+export {CardInput, CardSelect};

@@ -3,7 +3,7 @@ import React from "react";
 function CardButton(props) {
     return(
         <>
-            <div className="button" id={props.id}>{props.label}</div>
+            <div className="button cardButton" id={props.id} onClick={props.eventClick}>{props.label}</div>
         </>
     );
 }

@@ -70,8 +70,49 @@ a {
     font-size: 14px;
     line-height: 16px;
     width: 352px;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
 }
 
+.input input:focus{
+    border: 1px solid black;
+}
+
+.input select {
+    outline: none;
+    padding-left: 12px;
+    border: 0.5px solid #7B7B7B;
+    height: 32px;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 16px;
+    width: 352px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.input select:focus{
+    border: 1px solid black;
+}
+
+#cmbBloodTypeSignUp{
+    width: 64px;
+}
+
+#txtCEPSignUp{
+    width: 276px;
+}
+
+#cmbUFSignUp{
+    width: 64px;
+}
+
+#txtAdressSignUp{
+    width: 276px;
+}
+
+#txtNumberSignUp{
+    width: 64px;
+}
 
 .button {
     background: #8060F3;
@@ -86,10 +127,13 @@ a {
     cursor: pointer;
 }
 
-#btnLogin {
+.cardButton {
     height: 40px;
-    margin-top: 112px;
     margin-bottom: 20px;
+}
+
+#btnLogin {
+    margin-top: 112px;
 }
 
 .card p {
@@ -109,7 +153,10 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+}
+
+#signUpStep3 .horizontal{
+    align-items: stretch;
 }
 
 .card .horizontal h1{
@@ -128,6 +175,8 @@ a {
     height: 12px;
     width: 12px;
     background-color: rgba(249, 54, 27, 0.6);
+    transition: 0.25s;
+    cursor: pointer;
 }
 
 .steps .currentStep{
@@ -136,9 +185,17 @@ a {
 }
 
 #btnNextSignUpStep1{
-    height: 40px;
     margin-top: 32px;
-    margin-bottom: 20px;
+}
+
+#btnNextSignUpStep2{
+    margin-top: 26px;
+    margin-bottom: 0;
+}
+
+#btnNextSignUpStep3{
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 /* @media (max-height: 700px) {
