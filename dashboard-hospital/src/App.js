@@ -1,13 +1,13 @@
 import React from "react"
-import Login from "./pages/Login"
-import SignUp from "./pages/SignUp"
+import RoutesComponent from "./routes";
 
 import './assets/css/reset.css';
 import './assets/css/style.css';
 
 function App() {
-    return ( <>
-        <SignUp/>
+    return ( 
+        <>
+            <RoutesComponent/>
         </>
     );
 }
