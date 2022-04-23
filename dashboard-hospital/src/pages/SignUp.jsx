@@ -1,9 +1,13 @@
 import React from "react";
+import useNavigate from "react-router-dom";
 import {TopBar, BottomBar} from "../components/InicialBar";
 import CardInput from "../components/Input";
 import CardButton from "../components/Button";
 
 function SignUp(){
+
+    const navigate = useNavigate();
+
     return(
         <>
             <TopBar/>
@@ -35,7 +39,7 @@ function SignUp(){
                     />
                     <CardButton label="Próximo" id="btnNextSignUpStep1"/>
                     <p>Já possui uma conta?</p>
-                    <p><a href="">Entre</a></p>
+                    <p><a onClick={navigate("/")}>Entre</a></p>
                 </div>
             </div>
 
