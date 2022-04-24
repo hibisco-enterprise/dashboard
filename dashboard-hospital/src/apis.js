@@ -8,4 +8,8 @@ const apiViaCep = axios.create({
   baseURL: "https://viacep.com.br/ws" 
 })
 
-export {apiIBGE, apiViaCep};
+const apiKitsune = axios.create({
+  baseURL: "localhost:8080" 
+})
+
+export {apiIBGE, apiViaCep, apiKitsune};

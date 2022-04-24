@@ -4,7 +4,7 @@ import {TopBar, BottomBar} from "../components/InicialBar";
 import {CardInput, CardSelect} from "../components/Input";
 import CardButton from "../components/Button";
 
-import {apiIBGE, apiViaCep} from "../apis";
+import {apiIBGE, apiViaCep, apiKitsune} from "../apis";
 
 function SignUp(){
 
@@ -41,11 +41,6 @@ function SignUp(){
     useEffect(() => {
         apiIBGE.get(`${uf}/municipios?orderBy=nome`).then((res) =>{
             setMunicipios(res.data);
-            if (document.getElementById("cmbCitySignUp").value == "Selecione primeiro um UF...") {
-                document.getElementById("cmbCitySignUp").style.color = "grey";
-            } else {
-                document.getElementById("cmbCitySignUp").style.color = "black";
-            }
         }).catch((err) =>{
             setMunicipios([]);
             console.error(err);
@@ -53,13 +48,23 @@ function SignUp(){
 
     }, [uf]);
 
+    const [validCEP, setValidCEP] = useState(false);
     useEffect(() => {
-        if(cep != ""){
+        if(cep !== "" && cep.indexOf('_') < 0){
             apiViaCep.get(`${cep}/json`).then((res) =>{
-                setUF(res.data.uf);
-                setCity(res.data.localidade);
-                setNeighborhood(res.data.bairro);
-                setAdress(res.data.logradouro);
+                if(res.data.erro){
+                    setValidCEP(false);
+                    setUF("");
+                    setCity("");
+                    setNeighborhood("");
+                    setAdress("");
+                } else {
+                    setValidCEP(true);
+                    setUF(res.data.uf);
+                    setCity(res.data.localidade);
+                    setNeighborhood(res.data.bairro);
+                    setAdress(res.data.logradouro);
+                }
             }).catch((err) =>{
                 console.error(err);
             })
@@ -105,6 +110,129 @@ function SignUp(){
 
     const navigate = useNavigate();
 
+    function validateCPF(strCPF) {
+        
+        strCPF = strCPF.replaceAll(".", "");
+        strCPF = strCPF.replace("-", "");
+
+        var soma;
+        var resto;
+        soma = 0;
+      if (strCPF == "00000000000") return false;
+    
+      for (var i=1; i<=9; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+      resto = (soma * 10) % 11;
+    
+        if ((resto == 10) || (resto == 11))  resto = 0;
+        if (resto != parseInt(strCPF.substring(9, 10)) ) return false;
+    
+      soma = 0;
+        for (var i = 1; i <= 10; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+        resto = (soma * 10) % 11;
+    
+        if ((resto == 10) || (resto == 11))  resto = 0;
+        if (resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+        return true;
+    }
+
+    function validateFirstStep(){
+        if(email.trim().toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+            //valid email
+
+            if(password === confirmPassword){
+                //passwords match
+
+                var errors = [];
+                if (password.length < 8) {
+                    errors.push("Sua senha deve conter ao menos 8 caracteres."); 
+                }
+                if (password.search(/[a-z]/i) < 0) {
+                    errors.push("Sua senha deve conter ao menos uma letra.");
+                }
+                if (password.search(/[0-9]/) < 0) {
+                    errors.push("Sua senha deve conter ao menos um número."); 
+                }
+
+                if (errors.length > 0) {
+                    alert(errors.join("\n"));
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                alert("Senhas não correspondem! Verifique-a e tente novamente.");
+                return false;
+            }
+        } else {
+            alert("O email é inválido! Verifique-o e tente novamente.");
+            return false;
+        }
+    }
+
+    function validateSecondStep(){
+        if(name.trim() !== ""){
+            //valid name
+
+            if (validateCPF(cpf)) {
+                //valid cpf
+
+                if (telephone.match(/^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/)) {
+                    //valid telephone
+
+                    return true;
+                } else {
+                    alert("O telefone é inválido! Verifique-o e tente novamente.");
+                    return false;
+                }
+            } else {
+                alert("O CPF é inválido! Verifique-o e tente novamente.");
+                return false;
+            }
+        } else {
+            alert("O nome está vazio! Verifique-o e tente novamente.");
+            return false;
+        }
+    }
+
+    function validateThirdStep(){
+        if(cep.match(/^\d{5}-\d{3}$/) && validCEP){
+            //valid cep
+
+            if (number !== "") {
+                //number is not empty
+
+                return true;
+            } else {
+                alert("O número está vazio! Verifique-o e tente novamente.");
+                return false;
+            }
+        } else {
+            alert("O CEP é inválido! Verifique-o e tente novamente.");
+            return false;
+        }
+    }
+
+    function goToStep2(){
+        const isValid = validateFirstStep();
+        if(isValid){
+            signUpStep2();
+        }
+    }
+
+    function goToStep3(){
+        const isValid = validateSecondStep();
+        if(isValid){
+            signUpStep3();
+        }
+    }
+
+    function finishSignUp(){
+        const isValid = validateThirdStep();
+        if(isValid){
+            navigate("/");
+        }
+    }
+
     return(
         <>
             <TopBar/>
@@ -145,7 +273,7 @@ function SignUp(){
                             value={confirmPassword}
                             setValue={setConfirmPassword}
                             />
-                        <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => signUpStep2()}/>
+                        <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
                         <p>Já possui uma conta?</p>
                         <p><a onClick={() => navigate("/")}>Entre</a></p>
                     </div>
@@ -188,7 +316,7 @@ function SignUp(){
                             setValue={setBloodType}
                             />
                         </div>
-                        <CardButton label="Próximo" id="btnNextSignUpStep2" eventClick={() => signUpStep3()}/>
+                        <CardButton label="Próximo" id="btnNextSignUpStep2" eventClick={() => goToStep3()}/>
                     </div>
 
                     <div id="signUpStep3" style={{display: 'none'}}>
@@ -214,8 +342,8 @@ function SignUp(){
                         <CardSelect
                             id="cmbCitySignUp"
                             label="Cidade"
-                            options={(municipios.length == 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
-                            value={(city == "") ? "Selecione primeiro um UF..." : city}
+                            options={(municipios.length === 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
+                            value={(city === "") ? "Selecione primeiro um UF..." : city}
                             setValue={setCity}
                             />
                         <CardInput
@@ -246,7 +374,7 @@ function SignUp(){
                                 setValue={setNumber}
                                 />
                         </div>
-                        <CardButton label="Finalizar" id="btnNextSignUpStep3" eventClick={() => signUpStep1()}/>
+                        <CardButton label="Finalizar" id="btnNextSignUpStep3" eventClick={() => finishSignUp()}/>
                     </div>
                 </div>
             </div>
