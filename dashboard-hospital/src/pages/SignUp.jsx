@@ -41,21 +41,29 @@ function SignUp(){
     useEffect(() => {
         apiIBGE.get(`${uf}/municipios?orderBy=nome`).then((res) =>{
             setMunicipios(res.data);
+            if (document.getElementById("cmbCitySignUp").value == "Selecione primeiro um UF...") {
+                document.getElementById("cmbCitySignUp").style.color = "grey";
+            } else {
+                document.getElementById("cmbCitySignUp").style.color = "black";
+            }
         }).catch((err) =>{
+            setMunicipios([]);
             console.error(err);
         })
 
     }, [uf]);
 
     useEffect(() => {
-        apiViaCep.get(`${cep}/json`).then((res) =>{
-            setUF(res.data.uf);
-            setCity(res.data.localidade);
-            setNeighborhood(res.data.bairro);
-            setAdress(res.data.logradouro);
-        }).catch((err) =>{
-            console.error(err);
-        })
+        if(cep != ""){
+            apiViaCep.get(`${cep}/json`).then((res) =>{
+                setUF(res.data.uf);
+                setCity(res.data.localidade);
+                setNeighborhood(res.data.bairro);
+                setAdress(res.data.logradouro);
+            }).catch((err) =>{
+                console.error(err);
+            })
+        }
     }, [cep])
 
     const stepBalls = document.getElementsByClassName("step");
@@ -156,6 +164,8 @@ function SignUp(){
                             label="CPF"
                             placeholder="Digite seu CPF..."
                             type="text"
+                            mask="999.999.999-99"
+                            maskChar="_"
                             value={cpf}
                             setValue={setCPF}
                             />
@@ -164,6 +174,8 @@ function SignUp(){
                             label="Telefone"
                             placeholder="Digite seu telefone..."
                             type="tel"
+                            mask="(99) \99999-9999"
+                            maskChar="_"
                             value={telephone}
                             setValue={setTelephone}
                             />
@@ -186,6 +198,8 @@ function SignUp(){
                                 label="CEP"
                                 placeholder="Digite seu CEP..."
                                 type="text"
+                                mask="99999-999"
+                                maskChar="_"
                                 value={cep}
                                 setValue={setCEP}
                                 />
@@ -200,8 +214,8 @@ function SignUp(){
                         <CardSelect
                             id="cmbCitySignUp"
                             label="Cidade"
-                            options={municipios.map(municipio => (municipio.nome))}
-                            value={city}
+                            options={(municipios.length == 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
+                            value={(city == "") ? "Selecione primeiro um UF..." : city}
                             setValue={setCity}
                             />
                         <CardInput
@@ -226,6 +240,8 @@ function SignUp(){
                                 label="Nº"
                                 placeholder="XXX"
                                 type="text"
+                                mask="99999"
+                                maskChar=""
                                 value={number}
                                 setValue={setNumber}
                                 />
