@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
+import Dog from "./pages/Dog"
 
 export default function RoutesComponent() {
     return(
@@ -10,6 +11,7 @@ export default function RoutesComponent() {
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
+                <Route path="/dog" element={<Dog/>}/>
             </Routes>
         </BrowserRouter>
     );
