@@ -15,11 +15,11 @@ function SignUp(){
     const [name, setName] = useState("");
     const [cpf, setCPF] = useState("");
     const [telephone, setTelephone] = useState("");
-    const [bloodType, setBloodType] = useState("");
+    const [bloodType, setBloodType] = useState("O+");
 
     const [cep, setCEP] = useState("");
-    const [uf, setUF] = useState("");
-    const [city, setCity] = useState("");
+    const [uf, setUF] = useState("AC");
+    const [city, setCity] = useState("Acrelândia");
     const [neighborhood, setNeighborhood] = useState("");
     const [address, setAddress] = useState("");
     const [number, setNumber] = useState("");
