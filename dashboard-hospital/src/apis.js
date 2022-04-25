@@ -9,7 +9,11 @@ const apiViaCep = axios.create({
 })
 
 const apiKitsune = axios.create({
-  baseURL: "localhost:8080" 
+  baseURL: "http://localhost:8080",
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    "Content-Type": "application/json;charset=UTF-8"
+  } 
 })
 
 export {apiIBGE, apiViaCep, apiKitsune};

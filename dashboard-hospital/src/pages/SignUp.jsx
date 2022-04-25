@@ -21,7 +21,7 @@ function SignUp(){
     const [uf, setUF] = useState("");
     const [city, setCity] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
-    const [adress, setAdress] = useState("");
+    const [address, setAddress] = useState("");
     const [number, setNumber] = useState("");
 
     const [estados, setEstados] = useState([]);
@@ -57,13 +57,13 @@ function SignUp(){
                     setUF("");
                     setCity("");
                     setNeighborhood("");
-                    setAdress("");
+                    setAddress("");
                 } else {
                     setValidCEP(true);
                     setUF(res.data.uf);
                     setCity(res.data.localidade);
                     setNeighborhood(res.data.bairro);
-                    setAdress(res.data.logradouro);
+                    setAddress(res.data.logradouro);
                 }
             }).catch((err) =>{
                 console.error(err);
@@ -229,7 +229,28 @@ function SignUp(){
     function finishSignUp(){
         const isValid = validateThirdStep();
         if(isValid){
-            navigate("/");
+            apiKitsune.post('/donators/register', {
+                "email": email,
+                "password": password,
+                "phone": telephone,
+                "nameDonator": name,
+                "cpf": cpf,
+                "bloodType": bloodType,
+                "address": address,
+                "neighborhood": neighborhood,
+                "city": city,
+                "uf": uf,
+                "cep": cep,
+                "number": number
+            }).then((res) =>{
+                if (res.status === 201) {
+                    navigate("/");
+                }else{
+                    console.log(res);
+                }
+            }).catch((err) =>{
+                console.error(err);
+            })
         }
     }
 
@@ -356,12 +377,12 @@ function SignUp(){
                             />
                         <div className="horizontal">
                             <CardInput
-                                id="txtAdressSignUp"
+                                id="txtAddressSignUp"
                                 label="Logradouro"
                                 placeholder="Digite seu logradouro..."
                                 type="text"
-                                value={adress}
-                                setValue={setAdress}
+                                value={address}
+                                setValue={setAddress}
                                 />
                             <CardInput
                                 id="txtNumberSignUp"
