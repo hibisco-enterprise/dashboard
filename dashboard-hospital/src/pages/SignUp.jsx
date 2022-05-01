@@ -3,12 +3,14 @@ import {useNavigate} from "react-router-dom";
 import {TopBar, BottomBar} from "../components/InicialBar";
 import {CardInput, CardSelect} from "../components/Input";
 import CardButton from "../components/Button";
+import Loading from "../components/Loading";
 
 import {apiIBGE, apiViaCep, apiKitsune} from "../apis";
 
 function SignUp(){
 
     const [step, setStep] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -217,6 +219,7 @@ function SignUp(){
     function finishSignUp(){
         const isValid = validateThirdStep();
         if(isValid){
+            setLoading(true);
             apiKitsune.post('/donators/register', {
                 "email": email,
                 "password": password,
@@ -238,6 +241,8 @@ function SignUp(){
                 }
             }).catch((err) =>{
                 console.error(err);
+            }).finally(() => {
+                setLoading(false);
             })
         }
     }
@@ -397,6 +402,7 @@ function SignUp(){
             </div>
 
             <BottomBar/>
+            {loading ? <Loading/> : <></>}
         </>
     );
 }

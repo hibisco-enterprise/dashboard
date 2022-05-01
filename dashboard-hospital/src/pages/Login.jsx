@@ -3,10 +3,12 @@ import {useNavigate} from "react-router-dom";
 import {TopBar, BottomBar} from "../components/InicialBar";
 import {CardInput} from "../components/Input";
 import CardButton from "../components/Button";
+import Loading from "../components/Loading";
 
 import {apiKitsune} from "../apis";
 
 function Login(){
+    const [loading, setLoading] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,6 +36,7 @@ function Login(){
     function doLogin(){
         const isValid = validateLogin();
         if(isValid){
+            setLoading(true);
             apiKitsune.post('/donators/login', {
                 "email": email,
                 "password": password
@@ -45,6 +48,8 @@ function Login(){
                 }
             }).catch((err) =>{
                 console.error(err);
+            }).finally(() => {
+                setLoading(false);
             })
         }
     }
@@ -79,6 +84,7 @@ function Login(){
             </div>
 
             <BottomBar/>
+            {loading ? <Loading/> : <></>}
         </>
     );
 }
