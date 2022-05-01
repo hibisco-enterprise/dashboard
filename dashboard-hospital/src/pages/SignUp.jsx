@@ -235,7 +235,7 @@ function SignUp(){
                 "number": number
             }).then((res) =>{
                 if (res.status === 201) {
-                    navigate("/");
+                    navigate("/login");
                 }else{
                     console.log(res);
                 }
@@ -291,7 +291,7 @@ function SignUp(){
                                 />
                             <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
                             <p>Já possui uma conta?</p>
-                            <p><a onClick={() => navigate("/")}>Entre</a></p>
+                            <p><a onClick={() => navigate("/login")}>Entre</a></p>
                         </div>
 
                     : step === 2 ? 
