@@ -176,7 +176,6 @@ a {
     width: 12px;
     background-color: rgba(249, 54, 27, 0.6);
     transition: 0.25s;
-    cursor: pointer;
 }
 
 .steps .currentStep{

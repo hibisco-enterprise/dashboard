@@ -8,6 +8,8 @@ import {apiIBGE, apiViaCep, apiKitsune} from "../apis";
 
 function SignUp(){
 
+    const [step, setStep] = useState(1);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -72,40 +74,26 @@ function SignUp(){
     }, [cep])
 
     const stepBalls = document.getElementsByClassName("step");
-
-    function hide(element) {
-        element.style.display = "none";
-    }
-    
-    function show(element) {
-        element.style.display = "block";
-    }
     
     function signUpStep1(){
         stepBalls[0].classList.add("currentStep");
         stepBalls[1].classList.remove("currentStep");
         stepBalls[2].classList.remove("currentStep");
-        show(document.getElementById("signUpStep1"));
-        hide(document.getElementById("signUpStep2"));
-        hide(document.getElementById("signUpStep3"));
+        setStep(1);
     }
     
     function signUpStep2(){
         stepBalls[0].classList.remove("currentStep");
         stepBalls[1].classList.add("currentStep");
         stepBalls[2].classList.remove("currentStep");
-        hide(document.getElementById("signUpStep1"));
-        show(document.getElementById("signUpStep2"));
-        hide(document.getElementById("signUpStep3"));
+        setStep(2);
     }
     
     function signUpStep3(){
         stepBalls[0].classList.remove("currentStep");
         stepBalls[1].classList.remove("currentStep");
         stepBalls[2].classList.add("currentStep");
-        hide(document.getElementById("signUpStep1"));
-        hide(document.getElementById("signUpStep2"));
-        show(document.getElementById("signUpStep3"));
+        setStep(3);
     }
 
     const navigate = useNavigate();
@@ -263,140 +251,148 @@ function SignUp(){
                     <div className="horizontal" style={{marginBottom: '24px'}}>
                         <h1>Cadastro</h1>
                         <div className="steps">
-                            <div className="step currentStep" onClick={() => signUpStep1()}/>
-                            <div className="step" onClick={() => signUpStep2()}/>
-                            <div className="step" onClick={() => signUpStep3()}/>
+                            <div className="step currentStep"/>
+                            <div className="step"/>
+                            <div className="step"/>
                         </div>
                     </div>
 
-                    <div id="signUpStep1">
-                        <CardInput
-                            id="txtEmailSignUp"
-                            label="Email"
-                            placeholder="Digite seu email..."
-                            type="email"
-                            value={email}
-                            setValue={setEmail}
-                            />
-                        <CardInput
-                            id="txtPasswordSignUp"
-                            label="Senha"
-                            placeholder="Digite sua senha..."
-                            type="password"
-                            value={password}
-                            setValue={setPassword}
-                            />
-                        <CardInput
-                            id="txtConfirmPasswordSignUp"
-                            label="Confirme sua senha"
-                            placeholder="Digite sua senha novamente..."
-                            type="password"
-                            value={confirmPassword}
-                            setValue={setConfirmPassword}
-                            />
-                        <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
-                        <p>Já possui uma conta?</p>
-                        <p><a onClick={() => navigate("/")}>Entre</a></p>
-                    </div>
+                    {step === 1 ?
 
-                    <div id="signUpStep2" style={{display: 'none'}}>
-                        <CardInput
-                            id="txtNameSignUp"
-                            label="Nome"
-                            placeholder="Digite seu nome..."
-                            type="text"
-                            value={name}
-                            setValue={setName}
-                            />
-                        <CardInput
-                            id="txtCPFSignUp"
-                            label="CPF"
-                            placeholder="Digite seu CPF..."
-                            type="text"
-                            mask="999.999.999-99"
-                            maskChar="_"
-                            value={cpf}
-                            setValue={setCPF}
-                            />
-                        <CardInput
-                            id="txtTelephoneSignUp"
-                            label="Telefone"
-                            placeholder="Digite seu telefone..."
-                            type="tel"
-                            mask="(99) \99999-9999"
-                            maskChar="_"
-                            value={telephone}
-                            setValue={setTelephone}
-                            />
-                        <div>
-                        <CardSelect
-                            id="cmbBloodTypeSignUp"
-                            label="Tipo Sanguíneo"
-                            options={["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]}
-                            value={bloodType}
-                            setValue={setBloodType}
-                            />
-                        </div>
-                        <CardButton label="Próximo" id="btnNextSignUpStep2" eventClick={() => goToStep3()}/>
-                    </div>
-
-                    <div id="signUpStep3" style={{display: 'none'}}>
-                        <div className="horizontal">
+                        <div id="signUpStep1">
                             <CardInput
-                                id="txtCEPSignUp"
-                                label="CEP"
-                                placeholder="Digite seu CEP..."
+                                id="txtEmailSignUp"
+                                label="Email"
+                                placeholder="Digite seu email..."
+                                type="email"
+                                value={email}
+                                setValue={setEmail}
+                                />
+                            <CardInput
+                                id="txtPasswordSignUp"
+                                label="Senha"
+                                placeholder="Digite sua senha..."
+                                type="password"
+                                value={password}
+                                setValue={setPassword}
+                                />
+                            <CardInput
+                                id="txtConfirmPasswordSignUp"
+                                label="Confirme sua senha"
+                                placeholder="Digite sua senha novamente..."
+                                type="password"
+                                value={confirmPassword}
+                                setValue={setConfirmPassword}
+                                />
+                            <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
+                            <p>Já possui uma conta?</p>
+                            <p><a onClick={() => navigate("/")}>Entre</a></p>
+                        </div>
+
+                    : step === 2 ? 
+
+                        <div id="signUpStep2">
+                            <CardInput
+                                id="txtNameSignUp"
+                                label="Nome"
+                                placeholder="Digite seu nome..."
                                 type="text"
-                                mask="99999-999"
+                                value={name}
+                                setValue={setName}
+                                />
+                            <CardInput
+                                id="txtCPFSignUp"
+                                label="CPF"
+                                placeholder="Digite seu CPF..."
+                                type="text"
+                                mask="999.999.999-99"
                                 maskChar="_"
-                                value={cep}
-                                setValue={setCEP}
+                                value={cpf}
+                                setValue={setCPF}
                                 />
+                            <CardInput
+                                id="txtTelephoneSignUp"
+                                label="Telefone"
+                                placeholder="Digite seu telefone..."
+                                type="tel"
+                                mask="(99) \99999-9999"
+                                maskChar="_"
+                                value={telephone}
+                                setValue={setTelephone}
+                                />
+                            <div>
                             <CardSelect
-                                id="cmbUFSignUp"
-                                label="UF"
-                                options={estados.map(estado => (estado.sigla))}
-                                value={uf}
-                                setValue={setUF}
+                                id="cmbBloodTypeSignUp"
+                                label="Tipo Sanguíneo"
+                                options={["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]}
+                                value={bloodType}
+                                setValue={setBloodType}
                                 />
+                            </div>
+                            <CardButton label="Próximo" id="btnNextSignUpStep2" eventClick={() => goToStep3()}/>
                         </div>
-                        <CardSelect
-                            id="cmbCitySignUp"
-                            label="Cidade"
-                            options={(municipios.length === 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
-                            value={(city === "") ? "Selecione primeiro um UF..." : city}
-                            setValue={setCity}
-                            />
-                        <CardInput
-                            id="txtNeighborhoodSignUp"
-                            label="Bairro"
-                            placeholder="Digite seu bairro..."
-                            type="text"
-                            value={neighborhood}
-                            setValue={setNeighborhood}
-                            />
-                        <div className="horizontal">
-                            <CardInput
-                                id="txtAddressSignUp"
-                                label="Logradouro"
-                                placeholder="Digite seu logradouro..."
-                                type="text"
-                                value={address}
-                                setValue={setAddress}
+
+                    : step === 3 ?
+
+                        <div id="signUpStep3">
+                            <div className="horizontal">
+                                <CardInput
+                                    id="txtCEPSignUp"
+                                    label="CEP"
+                                    placeholder="Digite seu CEP..."
+                                    type="text"
+                                    mask="99999-999"
+                                    maskChar="_"
+                                    value={cep}
+                                    setValue={setCEP}
+                                    />
+                                <CardSelect
+                                    id="cmbUFSignUp"
+                                    label="UF"
+                                    options={estados.map(estado => (estado.sigla))}
+                                    value={uf}
+                                    setValue={setUF}
+                                    />
+                            </div>
+                            <CardSelect
+                                id="cmbCitySignUp"
+                                label="Cidade"
+                                options={(municipios.length === 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
+                                value={(city === "") ? "Selecione primeiro um UF..." : city}
+                                setValue={setCity}
                                 />
                             <CardInput
-                                id="txtNumberSignUp"
-                                label="Nº"
-                                placeholder="XXX"
+                                id="txtNeighborhoodSignUp"
+                                label="Bairro"
+                                placeholder="Digite seu bairro..."
                                 type="text"
-                                mask="99999"
-                                maskChar=""
-                                value={number}
-                                setValue={setNumber}
+                                value={neighborhood}
+                                setValue={setNeighborhood}
                                 />
+                            <div className="horizontal">
+                                <CardInput
+                                    id="txtAddressSignUp"
+                                    label="Logradouro"
+                                    placeholder="Digite seu logradouro..."
+                                    type="text"
+                                    value={address}
+                                    setValue={setAddress}
+                                    />
+                                <CardInput
+                                    id="txtNumberSignUp"
+                                    label="Nº"
+                                    placeholder="XXX"
+                                    type="text"
+                                    mask="99999"
+                                    maskChar=""
+                                    value={number}
+                                    setValue={setNumber}
+                                    />
+                            </div>
+                            <CardButton label="Finalizar" id="btnNextSignUpStep3" eventClick={() => finishSignUp()}/>
                         </div>
-                        <CardButton label="Finalizar" id="btnNextSignUpStep3" eventClick={() => finishSignUp()}/>
-                    </div>
+
+                    : <></>}
                 </div>
             </div>
 
