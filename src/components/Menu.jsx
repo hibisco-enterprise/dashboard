@@ -69,4 +69,59 @@ function MenuDonator(props) {
 
 }
 
+function MenuHospital(props) {
+
+    const navigate = useNavigate();
+    
+    return(
+
+        <nav className="menu">
+            <div>
+                <div className="horizontal">
+                    <b className="title">kitsune</b>
+                    <div className="sandwich">
+                        <div/>
+                        <div/>
+                        <div/>
+                    </div>
+                </div>
+                <div style={{marginTop:'36px'}}>
+                    <div className={(props.selected !== "requests") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/requests")}>
+                        <img src={(props.selected !== "requests") ? homeIcon : homeSelectedIcon} alt="Requests Icon" />
+                        <p>Início</p>
+                    </div>
+                    <div className={(props.selected !== "stock") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/stock")}>
+                        <img src={(props.selected !== "stock") ? profileIcon : profileSelectedIcon} alt="Stock Icon" />
+                        <p>Perfil</p>
+                    </div>
+                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/history")}>
+                        <img src={(props.selected !== "history") ? faqIcon : faqSelectedIcon} alt="History Icon" />
+                        <p>FAQ</p>
+                    </div>
+
+                    <div className="menuSeparatorLine"/>
+
+                    <div className={(props.selected !== "alert") ? "menuOption" : "menuOption menuOptionSelected"}>
+                        <img src={(props.selected !== "alert") ? bellIcon : bellSelectedIcon} alt="Alert Icon" />
+                        <p>Alertas</p>
+
+                    </div>
+                    <div className={(props.selected !== "config") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/config")}>
+                        <img src={(props.selected !== "config") ? gearIcon : homeSelectedIcon} alt="Configs Icon" />
+                        <p>Configurações</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className="menuOption" onClick={() => navigate("/login")}>
+                    <img src={logoffIcon} alt="Logoff Icon" />
+                    <p>Desconectar</p>
+                </div>
+            </div>
+        </nav>
+
+    )
+
+}
+
 export {MenuDonator}
