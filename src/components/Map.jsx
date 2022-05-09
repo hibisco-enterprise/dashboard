@@ -6,7 +6,7 @@ function Map() {
 
     return (
         <>
-        <div ref={mapContainer} className="map-container" />
+        {/* <div ref={mapContainer} className="map-container" id='mapContainer'/> */}
         </>
     );
 }
