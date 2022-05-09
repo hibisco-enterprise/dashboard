@@ -7,11 +7,17 @@ import profileIcon from "../assets/img/profile.svg";
 import profileSelectedIcon from "../assets/img/profile-selected.svg";
 import faqIcon from "../assets/img/faq.svg";
 import faqSelectedIcon from "../assets/img/faq-selected.svg";
-// import trophyIcon from "../assets/img/trophy.svg";
-// import trophySelectedIcon from "../assets/img/trophy-selected.svg";
 import bellIcon from "../assets/img/bell.svg";
 import bellSelectedIcon from "../assets/img/bell-selected.svg";
 import gearIcon from "../assets/img/gear.svg";
+
+import scheduleIcon from "../assets/img/schedule.svg";
+import scheduleSelectedIcon from "../assets/img/schedule-selected.svg";
+import bloodtypeIcon from "../assets/img/bloodtype.svg";
+import bloodtypeSelectedIcon from "../assets/img/bloodtype-selected.svg";
+import historyIcon from "../assets/img/history.svg";
+import historySelectedIcon from "../assets/img/history-selected.svg";
+
 import logoffIcon from "../assets/img/logoff.svg";
 
 function MenuDonator(props) {
@@ -38,6 +44,10 @@ function MenuDonator(props) {
                     <div className={(props.selected !== "profile") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/profile")}>
                         <img src={(props.selected !== "profile") ? profileIcon : profileSelectedIcon} alt="Profile Icon" />
                         <p>Perfil</p>
+                    </div>
+                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/history")}>
+                        <img src={(props.selected !== "history") ? historyIcon : historySelectedIcon} alt="History Icon" />
+                        <p>Histórico</p>
                     </div>
                     <div className={(props.selected !== "faq") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/faq")}>
                         <img src={(props.selected !== "faq") ? faqIcon : faqSelectedIcon} alt="FAQ Icon" />
@@ -87,16 +97,16 @@ function MenuHospital(props) {
                 </div>
                 <div style={{marginTop:'36px'}}>
                     <div className={(props.selected !== "requests") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/requests")}>
-                        <img src={(props.selected !== "requests") ? homeIcon : homeSelectedIcon} alt="Requests Icon" />
-                        <p>Início</p>
+                        <img src={(props.selected !== "requests") ? scheduleIcon : scheduleSelectedIcon} alt="Requests Icon" />
+                        <p>Solicitações</p>
                     </div>
                     <div className={(props.selected !== "stock") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/stock")}>
-                        <img src={(props.selected !== "stock") ? profileIcon : profileSelectedIcon} alt="Stock Icon" />
-                        <p>Perfil</p>
+                        <img src={(props.selected !== "stock") ? bloodtypeIcon : bloodtypeSelectedIcon} alt="Stock Icon" />
+                        <p>Estoque</p>
                     </div>
-                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/history")}>
-                        <img src={(props.selected !== "history") ? faqIcon : faqSelectedIcon} alt="History Icon" />
-                        <p>FAQ</p>
+                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/history")}>
+                        <img src={(props.selected !== "history") ? historyIcon : historySelectedIcon} alt="History Icon" />
+                        <p>Histórico</p>
                     </div>
 
                     <div className="menuSeparatorLine"/>
