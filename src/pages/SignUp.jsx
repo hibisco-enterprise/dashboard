@@ -220,20 +220,25 @@ function SignUp(){
         const isValid = validateThirdStep();
         if(isValid){
             setLoading(true);
-            apiKitsune.post('/donators/register', {
-                "email": email,
-                "password": password,
-                "phone": telephone,
-                "nameDonator": name,
-                "cpf": cpf,
+            apiKitsune.post('/donators/register', 
+            {
                 "bloodType": bloodType,
-                "address": address,
-                "neighborhood": neighborhood,
-                "city": city,
-                "uf": uf,
-                "cep": cep,
-                "number": number
-            }).then((res) =>{
+                "user": {
+                    "email": email,
+                    "documentNumber": cpf,
+                    "password": password,
+                    "phone": telephone,
+                    "address": {
+                        "address": address,
+                        "neighborhood": neighborhood,
+                        "city": city,
+                        "uf": uf,
+                        "cep": cep,
+                        "number": number
+                    }
+                }
+            }
+            ).then((res) =>{
                 if (res.status === 201) {
                     navigate("/login");
                 }else{
