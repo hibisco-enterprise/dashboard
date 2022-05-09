@@ -1,7 +1,7 @@
 import React from "react";
 import InputMask from "react-input-mask";
 
-function CardInput(props) {
+function Input(props) {
 
     return(
         <div className="input">
@@ -11,7 +11,7 @@ function CardInput(props) {
     );
 }
 
-function CardSelect(props) {
+function Select(props) {
     return(
         <div className="input">
             <label htmlFor={props.id}>{props.label}</label><br/>
@@ -24,4 +24,4 @@ function CardSelect(props) {
     );
 }
 
-export {CardInput, CardSelect};
+export {Input, Select};

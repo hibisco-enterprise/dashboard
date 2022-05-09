@@ -8,4 +8,14 @@ function CardButton(props) {
     );
 }
 
-export default CardButton;
+function IconButton(props) {
+    return(
+        <>
+            <div className="button" id={props.id} onClick={props.eventClick}>
+                <img src={props.icon} alt="Icon" /><p>{props.label}</p>
+            </div>
+        </>
+    );
+}
+
+export {CardButton, IconButton};

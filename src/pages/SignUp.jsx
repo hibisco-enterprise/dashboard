@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {TopBar, BottomBar} from "../components/InicialBar";
-import {CardInput, CardSelect} from "../components/Input";
-import CardButton from "../components/Button";
+import {Input, Select} from "../components/Input";
+import {CardButton} from "../components/Button";
 import Loading from "../components/Loading";
 
 import {apiIBGE, apiViaCep, apiKitsune} from "../apis";
@@ -265,7 +265,7 @@ function SignUp(){
                     {step === 1 ?
 
                         <div id="signUpStep1">
-                            <CardInput
+                            <Input
                                 id="txtEmailSignUp"
                                 label="Email"
                                 placeholder="Digite seu email..."
@@ -273,7 +273,7 @@ function SignUp(){
                                 value={email}
                                 setValue={setEmail}
                                 />
-                            <CardInput
+                            <Input
                                 id="txtPasswordSignUp"
                                 label="Senha"
                                 placeholder="Digite sua senha..."
@@ -281,7 +281,7 @@ function SignUp(){
                                 value={password}
                                 setValue={setPassword}
                                 />
-                            <CardInput
+                            <Input
                                 id="txtConfirmPasswordSignUp"
                                 label="Confirme sua senha"
                                 placeholder="Digite sua senha novamente..."
@@ -297,7 +297,7 @@ function SignUp(){
                     : step === 2 ? 
 
                         <div id="signUpStep2">
-                            <CardInput
+                            <Input
                                 id="txtNameSignUp"
                                 label="Nome"
                                 placeholder="Digite seu nome..."
@@ -305,7 +305,7 @@ function SignUp(){
                                 value={name}
                                 setValue={setName}
                                 />
-                            <CardInput
+                            <Input
                                 id="txtCPFSignUp"
                                 label="CPF"
                                 placeholder="Digite seu CPF..."
@@ -315,7 +315,7 @@ function SignUp(){
                                 value={cpf}
                                 setValue={setCPF}
                                 />
-                            <CardInput
+                            <Input
                                 id="txtTelephoneSignUp"
                                 label="Telefone"
                                 placeholder="Digite seu telefone..."
@@ -326,7 +326,7 @@ function SignUp(){
                                 setValue={setTelephone}
                                 />
                             <div>
-                            <CardSelect
+                            <Select
                                 id="cmbBloodTypeSignUp"
                                 label="Tipo Sanguíneo"
                                 options={["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]}
@@ -341,7 +341,7 @@ function SignUp(){
 
                         <div id="signUpStep3">
                             <div className="horizontal">
-                                <CardInput
+                                <Input
                                     id="txtCEPSignUp"
                                     label="CEP"
                                     placeholder="Digite seu CEP..."
@@ -351,7 +351,7 @@ function SignUp(){
                                     value={cep}
                                     setValue={setCEP}
                                     />
-                                <CardSelect
+                                <Select
                                     id="cmbUFSignUp"
                                     label="UF"
                                     options={estados.map(estado => (estado.sigla))}
@@ -359,14 +359,14 @@ function SignUp(){
                                     setValue={setUF}
                                     />
                             </div>
-                            <CardSelect
+                            <Select
                                 id="cmbCitySignUp"
                                 label="Cidade"
                                 options={(municipios.length === 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
                                 value={(city === "") ? "Selecione primeiro um UF..." : city}
                                 setValue={setCity}
                                 />
-                            <CardInput
+                            <Input
                                 id="txtNeighborhoodSignUp"
                                 label="Bairro"
                                 placeholder="Digite seu bairro..."
@@ -375,7 +375,7 @@ function SignUp(){
                                 setValue={setNeighborhood}
                                 />
                             <div className="horizontal">
-                                <CardInput
+                                <Input
                                     id="txtAddressSignUp"
                                     label="Logradouro"
                                     placeholder="Digite seu logradouro..."
@@ -383,7 +383,7 @@ function SignUp(){
                                     value={address}
                                     setValue={setAddress}
                                     />
-                                <CardInput
+                                <Input
                                     id="txtNumberSignUp"
                                     label="Nº"
                                     placeholder="XXX"

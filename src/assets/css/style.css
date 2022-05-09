@@ -123,6 +123,7 @@ a {
     font-size: 16px;
     height: 32px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -149,9 +150,12 @@ a {
     color: #F9361B;
 }
 
-.card .horizontal{
+.horizontal {
     display: flex;
     flex-direction: row;
+}
+
+.card .horizontal{
     justify-content: space-between;
     align-items: center;
 }
@@ -208,6 +212,11 @@ a {
     background-color: rgba(255,255,255, 0.6);
 }
 
+.dashboard {
+    display: flex;
+    flex-direction:row;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -220,8 +229,6 @@ a {
 }
 
 .menu .horizontal{
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-right: 24px;
@@ -285,6 +292,102 @@ a {
     height: 1px;
     background-color: #E1E0E7;
     margin-top: 20px;
+}
+
+.section {
+    width: 100%;
+    height: calc(100vh - 64px - 64px);
+    margin-left: 32px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.section::-webkit-scrollbar{
+    display: none;
+}
+
+.section h1 {
+    color: #343A40;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 125%;
+    margin-bottom: 32px;
+}
+
+.section h2 {
+    color: #343A40;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 125%;
+}
+
+.profileViewer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+.profileViewer img {
+    border-radius: 100%;
+    height: 112px;
+    width: 112px;
+}
+
+.profileViewer div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 24px;
+}
+
+.profileViewer div p {
+    color: #7B7B7B;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    margin-top: 8px
+}
+
+.sectionContent {
+    display: flex;
+    flex-direction: row;
+}
+
+.profileData {
+    width: fit-content;
+}
+
+.profileData .input{
+    margin-right: 32px;
+}
+
+.profileData .input input[type="tel"]{
+    width: 276px;
+}
+
+.profileData .button{
+    margin-left: 608px;
+    align-self: flex-start;
+    width: 128px;
+}
+
+.profileData .button img{
+    margin-right: 8px;
+}
+
+#cmbBloodTypeProfile{
+    width: 64px;
+}
+
+#txtCEPProfile{
+    width: 276px;
+}
+
+#cmbUFProfile{
+    width: 64px;
 }
 
 /* @media (max-height: 700px) {
