@@ -142,6 +142,9 @@ function SignUp(){
                 if (password.search(/[0-9]/) < 0) {
                     errors.push("Sua senha deve conter ao menos um número."); 
                 }
+                if (password.search(/.*[$*&@#]/) < 0) {
+                    errors.push("Sua senha deve conter ao menos um caractere especial.");
+                } 
 
                 if (errors.length > 0) {
                     alert(errors.join("\n"));
