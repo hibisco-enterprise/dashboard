@@ -77,12 +77,12 @@ function SignUp(){
 
     const stepBalls = document.getElementsByClassName("step");
     
-    function signUpStep1(){
-        stepBalls[0].classList.add("currentStep");
-        stepBalls[1].classList.remove("currentStep");
-        stepBalls[2].classList.remove("currentStep");
-        setStep(1);
-    }
+    // function signUpStep1(){
+    //     stepBalls[0].classList.add("currentStep");
+    //     stepBalls[1].classList.remove("currentStep");
+    //     stepBalls[2].classList.remove("currentStep");
+    //     setStep(1);
+    // } resultado 
     
     function signUpStep2(){
         stepBalls[0].classList.remove("currentStep");
@@ -117,7 +117,7 @@ function SignUp(){
         if (resto !== parseInt(strCPF.substring(9, 10)) ) return false;
     
       soma = 0;
-        for (var i = 1; i <= 10; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+        for (var j = 1; j <= 10; j++) soma = soma + parseInt(strCPF.substring(j-1, j)) * (12 - j);
         resto = (soma * 10) % 11;
     
         if ((resto === 10) || (resto === 11))  resto = 0;
@@ -299,7 +299,7 @@ function SignUp(){
                                 />
                             <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
                             <p>Já possui uma conta?</p>
-                            <p><a onClick={() => navigate("/login")}>Entre</a></p>
+                            <p><a href="/#" onClick={() => navigate("/login")}>Entre</a></p>
                         </div>
 
                     : step === 2 ? 
