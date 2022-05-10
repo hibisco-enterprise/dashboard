@@ -12,8 +12,7 @@ export default function Profile() {
 
     const [name, setName] = useState("Macaco Maluco");
     const [email, setEmail] = useState("macaco@gmail.com");
-    const [telephone1, setTelephone1] = useState("11981582705");
-    const [telephone2, setTelephone2] = useState("1126315898");
+    const [telephone, setTelephone] = useState("11981582705");
     const [bloodType, setBloodType] = useState("O+");
 
     const [cep, setCEP] = useState("02188080");
@@ -101,23 +100,13 @@ export default function Profile() {
                             </div>
                             <div className="horizontal">
                                 <Input 
-                                    id="txtTelephone1Profile"
-                                    label="Telefone Celular"
-                                    placeholder="Digite seu telefone celular..."
+                                    id="txtTelephoneProfile"
+                                    label="Telefone"
+                                    placeholder="Digite seu telefone..."
                                     type="tel"
-                                    value={telephone1}
-                                    setValue={setTelephone1}
+                                    value={telephone}
+                                    setValue={setTelephone}
                                     mask="(99) \99999-9999"
-                                    maskChar="_"
-                                />
-                                <Input 
-                                    id="txtTelephone2Profile"
-                                    label="Telefone Fixo"
-                                    placeholder="Digite seu telefone fixo..."
-                                    type="tel"
-                                    value={telephone2}
-                                    setValue={setTelephone2}
-                                    mask="(99) 9999-9999"
                                     maskChar="_"
                                 />
                             </div>

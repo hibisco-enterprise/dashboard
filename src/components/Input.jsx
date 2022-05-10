@@ -17,7 +17,7 @@ function Select(props) {
             <label htmlFor={props.id}>{props.label}</label><br/>
             <select id={props.id} onChange={e => props.setValue(e.target.value)} value={props.value}>
                 {props.options.map((type)=>(
-                    <option value={type}>{type}</option>
+                    <option value={type} key={type}>{type}</option>
                 ))}
             </select>
         </div>
