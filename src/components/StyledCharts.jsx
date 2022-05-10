@@ -2,7 +2,9 @@ import React from 'react';
 import { Chart } from "react-google-charts";
 
 export default function StyledChart(props) {
+
     var options = {
+        height: props.height + 32,
         curveType: 'function',
         legend: {
             textStyle: {
@@ -12,7 +14,8 @@ export default function StyledChart(props) {
         },
         chartArea: {
             left: 32,
-            top: 8
+            top: 8,
+            height: props.height
         },
         vAxis: {
             textStyle: {
@@ -53,7 +56,7 @@ export default function StyledChart(props) {
             chartType="LineChart"
             data={props.data}
             width={"100%"}
-            height={"384px"}
+            height={`${props.height}px`}
             options={options}
             legendToggle
         />

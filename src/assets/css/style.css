@@ -75,7 +75,7 @@ a {
     font-family: 'Outfit', sans-serif;
 }
 
-.input input:focus{
+.input input:focus {
     border: 1px solid black;
 }
 
@@ -91,27 +91,27 @@ a {
     font-family: 'Outfit', sans-serif;
 }
 
-.input select:focus{
+.input select:focus {
     border: 1px solid black;
 }
 
-#cmbBloodTypeSignUp{
+#cmbBloodTypeSignUp {
     width: 64px;
 }
 
-#txtCEPSignUp{
+#txtCEPSignUp {
     width: 276px;
 }
 
-#cmbUFSignUp{
+#cmbUFSignUp {
     width: 64px;
 }
 
-#txtAddressSignUp{
+#txtAddressSignUp {
     width: 276px;
 }
 
-#txtNumberSignUp{
+#txtNumberSignUp {
     width: 64px;
 }
 
@@ -155,22 +155,22 @@ a {
     flex-direction: row;
 }
 
-.card .horizontal{
+.card .horizontal {
     justify-content: space-between;
     align-items: center;
 }
 
-.card .horizontal h1{
+.card .horizontal h1 {
     margin-bottom: 0;
 }
 
-.steps{
+.steps {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.steps .step{
+.steps .step {
     border-radius: 100px;
     margin-left: 6px;
     height: 12px;
@@ -179,26 +179,26 @@ a {
     transition: 0.25s;
 }
 
-.steps .currentStep{
+.steps .currentStep {
     width: 24px;
     background-color: #F9361B;
 }
 
-#btnNextSignUpStep1{
+#btnNextSignUpStep1 {
     margin-top: 32px;
 }
 
-#btnNextSignUpStep2{
+#btnNextSignUpStep2 {
     margin-top: 26px;
     margin-bottom: 0;
 }
 
-#btnNextSignUpStep3{
+#btnNextSignUpStep3 {
     margin-top: 10px;
     margin-bottom: 0;
 }
 
-.modal{
+.modal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,12 +209,12 @@ a {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(255,255,255, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .dashboard {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
 }
 
 .menu {
@@ -228,7 +228,7 @@ a {
     padding: 32px 24px;
 }
 
-.menu .horizontal{
+.menu .horizontal {
     justify-content: space-between;
     align-items: center;
     margin-right: 24px;
@@ -262,7 +262,7 @@ a {
     margin-right: 24px;
 }
 
-.menuOption:hover{
+.menuOption:hover {
     background-color: #F9361B18;
 }
 
@@ -297,15 +297,13 @@ a {
 .section {
     width: 100%;
     height: calc(100vh - 64px - 64px);
-    margin-left: 32px;
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding: 64px 32px;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.section::-webkit-scrollbar{
+.section::-webkit-scrollbar {
     display: none;
 }
 
@@ -322,9 +320,10 @@ a {
     font-weight: 500;
     font-size: 24px;
     line-height: 125%;
+    margin-bottom: 16px;
 }
 
-.profileViewer{
+.profileViewer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -348,7 +347,7 @@ a {
     font-weight: 400;
     font-size: 16px;
     line-height: 125%;
-    margin-top: 8px
+    margin-top: -8px;
 }
 
 .sectionContent {
@@ -360,35 +359,81 @@ a {
     width: fit-content;
 }
 
-.profileData .input{
+.profileData .input {
     margin-right: 32px;
 }
 
-.profileData .input input[type="tel"]{
+.profileData .input input[type="tel"] {
     width: 276px;
 }
 
-.profileData .button{
+.profileData .button {
     margin-left: 608px;
     align-self: flex-start;
     width: 128px;
 }
 
-.profileData .button img{
+.profileData .button img {
     margin-right: 8px;
 }
 
-#cmbBloodTypeProfile{
+#cmbBloodTypeProfile {
     width: 64px;
 }
 
-#txtCEPProfile{
+#txtCEPProfile {
     width: 276px;
 }
 
-#cmbUFProfile{
+#cmbUFProfile {
     width: 64px;
 }
+
+.minicard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    width: 256px;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 30px rgba(43, 37, 63, 0.2);
+    border-radius: 4px;
+    padding: 0 24px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.minicard p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #F9361B;
+    text-align: center;
+}
+
+.minicard h4 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40;
+    max-width: 192px;
+}
+
+.historyDonation h3 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 125%;
+    color: #495057;
+    margin-bottom: 4px;
+}
+
+.historyCards {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
 
 /* @media (max-height: 700px) {
     .inicialBar{

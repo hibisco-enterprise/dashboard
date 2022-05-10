@@ -78,7 +78,7 @@ export default function Profile() {
                         <ProfileViewer photo="https://c-fa.cdn.smule.com/rs-s53/arr/c9/14/da9882b3-c024-4a6f-bb94-f7efcb3e05c7_256.jpg" name="Macaco Maluco" email="macaco@gmail.com"/>
                     </div>
                     <div style={{marginBottom: '32px'}}>
-                        <h2 style={{marginBottom: '16px'}}>Dados</h2>
+                        <h2>Dados</h2>
                         <div className="profileData">
                             <div className="horizontal">
                                 <Input 
@@ -126,7 +126,7 @@ export default function Profile() {
                     </div>
 
                     <div>
-                        <h2 style={{marginBottom: '16px'}}>Endereço</h2>
+                        <h2>Endereço</h2>
                         <div className="profileData">
                             <Input
                                 id="txtCEPProfile"
