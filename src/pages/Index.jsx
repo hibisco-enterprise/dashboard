@@ -4,7 +4,7 @@ import { MenuDonator } from "../components/Menu";
 import Map from "../components/Map";
 
 export default function Index() {
-    mapboxgl.accessToken = 'pkeyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wyNTd1Nmd0MTVoODNjcDc5OXBmODYxMCJ9.PQo8LI7tQYbPRTdWbCJXSw'
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg'
 
     const mapContainer = useRef(null);
     const map = useRef(null);
