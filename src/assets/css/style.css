@@ -390,6 +390,11 @@ a {
     width: 64px;
 }
 
+.map-container {
+    width: 70%;
+    height: 50%;
+}
+
 /* @media (max-height: 700px) {
     .inicialBar{
         height: 48px;
