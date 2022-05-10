@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { MenuDonator } from "../components/Menu";
-import Map from "../components/Map";
 
 export default function Index() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg'
@@ -34,8 +33,9 @@ export default function Index() {
     return (
         <>
             <MenuDonator selected="home" />
-            <div ref={mapContainer} className="map-container" id='mapContainer'/>
-            {/* <Map /> */}
+            <div className='section'>
+                <div ref={mapContainer} className="map-container" id='mapContainer'/>
+            </div>
         </>
     );
 

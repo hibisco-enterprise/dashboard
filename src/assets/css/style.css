@@ -391,8 +391,8 @@ a {
 }
 
 .map-container {
-    width: 70%;
-    height: 50%;
+    /* width: 50%;
+    height: 100%; */
 }
 
 /* @media (max-height: 700px) {
