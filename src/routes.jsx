@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import Profile from "./pages/Profile"
 import History from "./pages/History"
+import FAQ from "./pages/FAQ"
 
 export default function RoutesComponent() {
     return(
@@ -16,6 +17,7 @@ export default function RoutesComponent() {
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/history" element={<History/>}/>
+                <Route path="/faq" element={<FAQ/>}/>
             </Routes>
         </BrowserRouter>
     );

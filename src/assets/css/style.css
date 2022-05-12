@@ -420,7 +420,7 @@ a {
     max-width: 192px;
 }
 
-.historyDonation h3 {
+h3 {
     font-weight: 500;
     font-size: 20px;
     line-height: 125%;
@@ -432,6 +432,59 @@ a {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+}
+
+.sectionFAQ {
+    padding-bottom: 64px;
+}
+
+.question {
+    background: rgba(157, 157, 157, 0.15);
+    padding: 24px 32px;
+    border-radius: 8px;
+    transition: 0.25s;
+    margin-right: 64px;
+    height: 100%;
+    margin-bottom: 24px;
+}
+
+.question .horizontal {
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.question h3 {
+    margin-bottom: 0;
+}
+
+.question img {
+    transition: 0.25s;
+    user-select: none;
+}
+
+.question p {
+    display: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 1px;
+    color: #716F7A;
+    margin-top: 32px;
+    transition: 0.25s;
+}
+
+.questionOpened {
+    height: fit-content;
+    transition: 0.25s;
+}
+
+.questionOpened img {
+    transform: rotate(180deg);
+}
+
+.questionOpened p {
+    display: block;
 }
 
 
