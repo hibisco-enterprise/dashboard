@@ -12,7 +12,7 @@ export default function Question(props) {
                 <h3>{props.question}</h3>
                 <img src={chevron} alt="Chevron" />
             </div>
-            <p>{props.explanation}</p>
+            <p>{props.answer}</p>
         </div>
     )
 
