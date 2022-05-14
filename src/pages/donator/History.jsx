@@ -3,7 +3,7 @@ import {MenuDonator} from "../../components/Menu";
 import StyledChart from "../../components/StyledCharts";
 import {CardDonation} from "../../components/MiniCard"
 
-export default function History() {
+export default function HistoryDonator() {
 
     var object = {
         "donations": [

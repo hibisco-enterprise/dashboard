@@ -96,11 +96,11 @@ function MenuHospital(props) {
                     </div>
                 </div>
                 <div style={{marginTop:'36px'}}>
-                    <div className={(props.selected !== "requests") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/requests")}>
+                    <div className={(props.selected !== "requests") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/requests")}>
                         <img src={(props.selected !== "requests") ? scheduleIcon : scheduleSelectedIcon} alt="Requests Icon" />
                         <p>Solicitações</p>
                     </div>
-                    <div className={(props.selected !== "stock") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/stock")}>
+                    <div className={(props.selected !== "stock") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/stock")}>
                         <img src={(props.selected !== "stock") ? bloodtypeIcon : bloodtypeSelectedIcon} alt="Stock Icon" />
                         <p>Estoque</p>
                     </div>
@@ -134,4 +134,4 @@ function MenuHospital(props) {
 
 }
 
-export {MenuDonator}
+export {MenuDonator, MenuHospital}

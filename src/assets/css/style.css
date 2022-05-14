@@ -412,6 +412,13 @@ a {
     text-align: center;
 }
 
+.minicard span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #F9361B;
+}
+
 .minicard h4 {
     font-weight: 500;
     font-size: 16px;
@@ -498,6 +505,7 @@ h3 {
     height: 32px;
     width: 32px;
     margin-right: 24px;
+    border-radius: 50%;
 }
 
 

@@ -9,7 +9,7 @@ export default function StyledChart(props) {
         legend: {
             textStyle: {
                 fontName: "Outfit",
-                color: '#A3A3A3'
+                color: '#343A40'
             }
         },
         chartArea: {
@@ -23,6 +23,7 @@ export default function StyledChart(props) {
                 color: '#A3A3A3',
                 fontSize: 12
             },
+            format: '',
             viewWindow: {
                 min: 0
             }
@@ -40,7 +41,7 @@ export default function StyledChart(props) {
             0: {
                 type: 'line',
                 color: '#F9361B',
-                visibleInLegend: false
+                // visibleInLegend: false
             }
         },
         pointsVisible: true,

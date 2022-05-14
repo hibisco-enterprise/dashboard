@@ -3,10 +3,13 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
+
 import Index from "./pages/donator/Index"
 import Profile from "./pages/donator/Profile"
-import History from "./pages/donator/History"
+import HistoryDonator from "./pages/donator/History"
 import FAQ from "./pages/donator/FAQ"
+
+import HistoryHospital from "./pages/hospital/History"
 
 export default function RoutesComponent() {
     return(
@@ -17,8 +20,10 @@ export default function RoutesComponent() {
 
                 <Route path="/" element={<Index/>}/>
                 <Route path="/donator/profile" element={<Profile/>}/>
-                <Route path="/donator/history" element={<History/>}/>
+                <Route path="/donator/history" element={<HistoryDonator/>}/>
                 <Route path="/donator/faq" element={<FAQ/>}/>
+
+                <Route path="/hospital/history" element={<HistoryHospital/>}/>
             </Routes>
         </BrowserRouter>
     );
