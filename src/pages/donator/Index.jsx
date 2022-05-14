@@ -1,5 +1,5 @@
 import React from "react";
-import {MenuDonator} from "../components/Menu";
+import {MenuDonator} from "../../components/Menu";
 
 export default function Index() {
 

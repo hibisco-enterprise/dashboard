@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import {MenuDonator} from "../components/Menu";
-import StyledChart from "../components/StyledCharts";
-import {CardDonation} from "../components/MiniCard"
+import {MenuDonator} from "../../components/Menu";
+import StyledChart from "../../components/StyledCharts";
+import {CardDonation} from "../../components/MiniCard"
 
 export default function History() {
 

@@ -494,6 +494,12 @@ h3 {
     transition: 0.25s;
 }
 
+.minicard img {
+    height: 32px;
+    width: 32px;
+    margin-right: 24px;
+}
+
 
 /* @media (max-height: 700px) {
     .inicialBar{

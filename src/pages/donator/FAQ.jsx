@@ -1,6 +1,6 @@
 import React from 'react';
-import {MenuDonator} from '../components/Menu';
-import Question from '../components/Question';
+import {MenuDonator} from '../../components/Menu';
+import Question from '../../components/Question';
 
 export default function FAQ(props) {
 

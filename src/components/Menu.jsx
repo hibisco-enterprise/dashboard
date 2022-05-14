@@ -41,15 +41,15 @@ function MenuDonator(props) {
                         <img src={(props.selected !== "home") ? homeIcon : homeSelectedIcon} alt="Home Icon" />
                         <p>Início</p>
                     </div>
-                    <div className={(props.selected !== "profile") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/profile")}>
+                    <div className={(props.selected !== "profile") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/profile")}>
                         <img src={(props.selected !== "profile") ? profileIcon : profileSelectedIcon} alt="Profile Icon" />
                         <p>Perfil</p>
                     </div>
-                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/history")}>
+                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/history")}>
                         <img src={(props.selected !== "history") ? historyIcon : historySelectedIcon} alt="History Icon" />
                         <p>Histórico</p>
                     </div>
-                    <div className={(props.selected !== "faq") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/faq")}>
+                    <div className={(props.selected !== "faq") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/faq")}>
                         <img src={(props.selected !== "faq") ? faqIcon : faqSelectedIcon} alt="FAQ Icon" />
                         <p>FAQ</p>
                     </div>

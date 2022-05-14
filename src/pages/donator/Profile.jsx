@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import {MenuDonator} from "../components/Menu";
-import ProfileViewer from "../components/ProfileViewer";
-import {Input, Select} from "../components/Input"
-import {IconButton} from "../components/Button"
+import {MenuDonator} from "../../components/Menu";
+import ProfileViewer from "../../components/ProfileViewer";
+import {Input, Select} from "../../components/Input"
+import {IconButton} from "../../components/Button"
 
-import {apiIBGE, apiViaCep} from '../apis'
+import {apiIBGE, apiViaCep} from '../../apis'
 
-import pencilIcon from "../assets/img/pencil.svg"
+import pencilIcon from "../../assets/img/pencil.svg"
 
 export default function Profile() {
 
