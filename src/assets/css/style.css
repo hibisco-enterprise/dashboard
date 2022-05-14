@@ -464,18 +464,23 @@ h3 {
 }
 
 .question p {
-    display: none;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 1px;
     color: #716F7A;
-    margin-top: 32px;
     transition: 0.25s;
+    overflow-x: hidden;
+    max-height: 0px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.question p::-webkit-scrollbar {
+    display: none;
 }
 
 .questionOpened {
-    height: fit-content;
     transition: 0.25s;
 }
 
@@ -484,7 +489,9 @@ h3 {
 }
 
 .questionOpened p {
-    display: block;
+    padding-top: 32px;
+    max-height: 256px;
+    transition: 0.25s;
 }
 
 
