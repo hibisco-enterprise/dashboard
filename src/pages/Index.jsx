@@ -1,41 +1,36 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { MenuDonator } from "../components/Menu";
+import Map, { Marker } from 'react-map-gl';
+import mapMarker from "../assets/img/map-marker.png";
 
 export default function Index() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg'
-
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const [lng, setLng] = useState(-70.9);
-    const [lat, setLat] = useState(42.35);
-    const [zoom, setZoom] = useState(9);
-
-    useEffect(() => {
-        if (map.current) return;
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [lng, lat],
-            zoom: zoom
-        });
-    });
-
-    useEffect(() => {
-        if (!map.current) return;
-        map.current.on('move', () => {
-            setLng(map.current.getCenter().lng.toFixed(4));
-            setLat(map.current.getCenter().lat.toFixed(4));
-            setZoom(map.current.getZoom().toFixed(2));
-        });
-    });
-
+    const [viewPort, setViewPort] = useState({
+        latitude: -23.555702209472656,
+        longitude: -46.659706115722656,
+        zoom: 14
+    })
     return (
         <>
-            <MenuDonator selected="home" />
-            <div className='section'>
-                <div ref={mapContainer} className="map-container" id='mapContainer'/>
+            <div className="home-index">
+                <MenuDonator selected="home" />
+                <div className='map-container'>
+                    <Map
+                        initialViewState={viewPort}
+                        mapStyle="mapbox://styles/safak/cknndpyfq268f17p53nmpwira"
+                        onViewPortChange={(nextViewPort) => setViewPort(nextViewPort)}
+                    >
+                        <Marker
+                            latitude={-23.555702209472656}
+                            longitude={-46.659706115722656}
+                            anchor="bottom" >
+                            <img src={mapMarker} style={{ fontSize: viewPort.zoom * 10 }} />
+                        </Marker>
+                    </Map>;
+                </div>
             </div>
+
         </>
     );
 

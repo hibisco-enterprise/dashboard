@@ -390,9 +390,24 @@ a {
     width: 64px;
 }
 
+.home-index {
+    display: flex;
+    flex-direction:row;
+}
+
 .map-container {
-    /* width: 50%;
-    height: 100%; */
+    width: 100vw;
+    height: 100vmin;
+    padding-bottom: 0;
+    overflow-y:hidden;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin: 0 0 0 0;
+}
+
+.mapbox-improve-map {
+    display: none;
 }
 
 /* @media (max-height: 700px) {
