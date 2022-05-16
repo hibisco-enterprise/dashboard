@@ -389,6 +389,10 @@ a {
     width: 64px;
 }
 
+#txtNumberProfile {
+    width: 64px;
+}
+
 .minicard {
     display: flex;
     flex-direction: row;
@@ -435,7 +439,7 @@ h3 {
     margin-bottom: 4px;
 }
 
-.historyCards {
+.queueDiv {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -508,42 +512,34 @@ h3 {
     border-radius: 50%;
 }
 
+.slider {
+    align-items: center;
+}
 
-/* @media (max-height: 700px) {
-    .inicialBar{
-        height: 48px;
-    }
+.slider p {
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40;
+    min-width: 40px;
+}
 
-    .container{
-        height: calc(100vh - 49px - 49px);
-    }
+.MuiSlider-root {
+    width: 320px !important;
+    margin: 24px !important;
+}
 
-    .card h1{
-        font-size: 24px;
-    }
+.MuiSlider-colorPrimary {
+    color: #F9361B !important
+}
 
-    .input{
-        margin-bottom: 8px;
-    }
+.MuiSlider-thumb {
+    height: 12px !important;
+    width: 12px !important;
+}
 
-    .input label{
-        font-size: 16px;
-    }
-
-    .input input{
-        font-size: 12px;
-        width: 288px;
-    }
-
-    .button {
-        font-size: 14px;
-    }
-
-    #btnLogin{
-        margin-top: 104px;
-    }
-
-    .card p{
-        font-size: 14px;
-    }
-} */
+.bloodStock .button {
+    margin-top: 16px;
+    margin-left: 816px;
+    align-self: flex-start;
+    width: 128px;
+}

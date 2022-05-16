@@ -214,7 +214,7 @@ export default function HistoryHospital(props) {
                             object.donations.map(filtro => (
                                 <>
                                     <h3>{filtro.when}</h3>
-                                    <div className="historyCards">
+                                    <div className="queueDiv">
                                         {
                                             filtro.donationData.map(donation => (
                                                 <CardDonator 

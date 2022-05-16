@@ -67,7 +67,7 @@ export default function HistoryDonator() {
                             object.donations.map(filtro => (
                                 <>
                                     <h3>{filtro.year}</h3>
-                                    <div className="historyCards">
+                                    <div className="queueDiv">
                                         {
                                             filtro.donationData.map(donation => (
                                                 <CardDonation 

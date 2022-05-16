@@ -173,7 +173,7 @@ export default function Profile() {
                                 />
                             </div>
                             <Input
-                                id="txtNumberSignUp"
+                                id="txtNumberProfile"
                                 label="Nº"
                                 placeholder="XXX"
                                 type="text"
@@ -183,7 +183,7 @@ export default function Profile() {
                                 setValue={setNumber}
                             />
                             <IconButton
-                                id="btnEditProfile" 
+                                id="btnEditAdress" 
                                 icon={pencilIcon} 
                                 label="Editar"
                             />
