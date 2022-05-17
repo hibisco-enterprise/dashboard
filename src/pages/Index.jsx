@@ -1,11 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
+import * as React from 'react';
+import { useState } from 'react';
 import { MenuDonator } from "../components/Menu";
 import Map, { Marker } from 'react-map-gl';
 import mapMarker from "../assets/img/map-marker.png";
+import 'mapbox-gl/dist/mapbox-gl.css'; 
 
 export default function Index() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg'
     const [viewPort, setViewPort] = useState({
         latitude: -23.555702209472656,
         longitude: -46.659706115722656,
@@ -18,16 +18,18 @@ export default function Index() {
                 <div className='map-container'>
                     <Map
                         initialViewState={viewPort}
-                        mapStyle="mapbox://styles/safak/cknndpyfq268f17p53nmpwira"
-                        onViewPortChange={(nextViewPort) => setViewPort(nextViewPort)}
-                    >
+                        style={{ width: '100vw', height: '100vh' }}
+                        mapStyle="mapbox://styles/mapbox/streets-v9"
+                        mapboxAccessToken="pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg">
+
                         <Marker
-                            latitude={-23.555702209472656}
                             longitude={-46.659706115722656}
-                            anchor="bottom" >
-                            <img src={mapMarker} style={{ fontSize: viewPort.zoom * 10 }} />
+                            latitude={-23.555702209472656}
+                            anchor="bottom"
+                            color='#F9361B'>
+                            {/* <img src="./pin.png" /> */}
                         </Marker>
-                    </Map>;
+                    </Map>
                 </div>
             </div>
 
