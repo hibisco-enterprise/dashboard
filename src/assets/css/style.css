@@ -543,3 +543,109 @@ h3 {
     align-self: flex-start;
     width: 128px;
 }
+
+.modalBlack {
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modalContent {
+    float: right;
+    background: #FFFFFF;
+    border-radius: 4px;
+    margin: 1.5% 1.5% 0 0;
+    max-width: 432px;
+}
+
+.modalLocalPhoto {
+    background: url("https://www.pc.rs.gov.br/upload/recortes/202201/21121934_439618_GD.jpg");
+    width: 432px;
+    height: calc(432px * 9 / 16);
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.circularIconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modalLocalPhoto .circularIconButton {
+    margin-top: 16px;
+    margin-right: 20px;
+}
+
+.modalText {
+    padding: 20px;
+}
+
+.modalText h2 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 125%;
+    color: #343A40;
+    margin-bottom: 8px;
+}
+
+.modalText .horizontal {
+    margin-bottom: 8px;
+}
+
+.modalText p {
+    font-size: 16px;
+    line-height: 125%;
+    color: #7B7B7B;
+    margin-left: 8px;
+}
+
+.bloodCards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.bloodCard {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgb(149, 149, 149, 0.1);
+    border-radius: 4px;
+    width: 94px;
+    height: 56px;
+    margin-top: 8px;
+}
+
+.bloodCard img {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.bloodCard h3 {
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40
+}
+
+.bloodCard h4 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 125%;
+    color: #343A40;
+    margin-top: 6px;
+}
