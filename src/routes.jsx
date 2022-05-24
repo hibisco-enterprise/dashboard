@@ -9,6 +9,7 @@ import Profile from "./pages/donator/Profile"
 import HistoryDonator from "./pages/donator/History"
 import FAQ from "./pages/donator/FAQ"
 
+import Requests from "./pages/hospital/Requests"
 import HistoryHospital from "./pages/hospital/History"
 import Stock from "./pages/hospital/Stock"
 
@@ -24,6 +25,7 @@ export default function RoutesComponent() {
                 <Route path="/donator/history" element={<HistoryDonator/>}/>
                 <Route path="/donator/faq" element={<FAQ/>}/>
 
+                <Route path="/hospital/requests" element={<Requests/>}/>
                 <Route path="/hospital/history" element={<HistoryHospital/>}/>
                 <Route path="/hospital/stock" element={<Stock/>}/>
             </Routes>

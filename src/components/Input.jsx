@@ -6,7 +6,7 @@ function Input(props) {
     return(
         <div className="input">
             <label htmlFor={props.id}>{props.label}</label><br/>
-            <InputMask mask={props.mask} maskChar={props.maskChar} id={props.id} placeholder={props.placeholder} type={props.type} onChange={e => props.setValue(e.target.value)} value={props.value}/>
+            <InputMask mask={props.mask} maskChar={props.maskChar} id={props.id} placeholder={props.placeholder} type={props.type} min={props.min} onChange={e => props.setValue(e.target.value)} value={props.value}/>
         </div>
     );
 }
