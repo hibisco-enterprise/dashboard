@@ -55,7 +55,7 @@ function SignUp(){
     const [validCEP, setValidCEP] = useState(false);
     useEffect(() => {
         if(cep !== "" && cep.indexOf('_') < 0){
-            apiViaCep.get(`${cep}/json`).then((res) =>{
+            apiViaCep.get(`${cep}/json`).then(res =>{
                 if(res.data.erro){
                     setValidCEP(false);
                     setUF("");
@@ -223,13 +223,14 @@ function SignUp(){
         const isValid = validateThirdStep();
         if(isValid){
             setLoading(true);
-            apiKitsune.post('/donators/register', 
-            {
+
+            const obj = {
                 "bloodType": bloodType,
                 "user": {
                     "email": email,
                     "documentNumber": cpf,
                     "password": password,
+                    "name": name,
                     "phone": telephone,
                     "address": {
                         "address": address,
@@ -241,13 +242,15 @@ function SignUp(){
                     }
                 }
             }
-            ).then((res) =>{
+
+            apiKitsune.post('/donators/register', obj
+            ).then(res =>{
                 if (res.status === 201) {
                     navigate("/login");
                 }else{
                     console.log(res);
                 }
-            }).catch((err) =>{
+            }).catch(err =>{
                 console.error(err);
             }).finally(() => {
                 setLoading(false);
@@ -278,6 +281,7 @@ function SignUp(){
                                 label="Email"
                                 placeholder="Digite seu email..."
                                 type="email"
+                                enabled={true}
                                 value={email}
                                 setValue={setEmail}
                                 />
@@ -286,6 +290,7 @@ function SignUp(){
                                 label="Senha"
                                 placeholder="Digite sua senha..."
                                 type="password"
+                                enabled={true}
                                 value={password}
                                 setValue={setPassword}
                                 />
@@ -294,12 +299,13 @@ function SignUp(){
                                 label="Confirme sua senha"
                                 placeholder="Digite sua senha novamente..."
                                 type="password"
+                                enabled={true}
                                 value={confirmPassword}
                                 setValue={setConfirmPassword}
                                 />
                             <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
                             <p>Já possui uma conta?</p>
-                            <p><a href="/#" onClick={() => navigate("/login")}>Entre</a></p>
+                            <p><a onClick={() => navigate("/login")}>Entre</a></p>
                         </div>
 
                     : step === 2 ? 
@@ -310,6 +316,7 @@ function SignUp(){
                                 label="Nome"
                                 placeholder="Digite seu nome..."
                                 type="text"
+                                enabled={true}
                                 value={name}
                                 setValue={setName}
                                 />
@@ -318,6 +325,7 @@ function SignUp(){
                                 label="CPF"
                                 placeholder="Digite seu CPF..."
                                 type="text"
+                                enabled={true}
                                 mask="999.999.999-99"
                                 maskChar="_"
                                 value={cpf}
@@ -328,6 +336,7 @@ function SignUp(){
                                 label="Telefone"
                                 placeholder="Digite seu telefone..."
                                 type="tel"
+                                enabled={true}
                                 mask="(99) \99999-9999"
                                 maskChar="_"
                                 value={telephone}
@@ -338,6 +347,8 @@ function SignUp(){
                                 id="cmbBloodTypeSignUp"
                                 label="Tipo Sanguíneo"
                                 options={["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]}
+                                enabled={true}
+                                size="small"
                                 value={bloodType}
                                 setValue={setBloodType}
                                 />
@@ -354,6 +365,8 @@ function SignUp(){
                                     label="CEP"
                                     placeholder="Digite seu CEP..."
                                     type="text"
+                                    enabled={true}
+                                    size="medium"
                                     mask="99999-999"
                                     maskChar="_"
                                     value={cep}
@@ -363,6 +376,8 @@ function SignUp(){
                                     id="cmbUFSignUp"
                                     label="UF"
                                     options={estados.map(estado => (estado.sigla))}
+                                    enabled={false}
+                                    size="small"
                                     value={uf}
                                     setValue={setUF}
                                     />
@@ -371,6 +386,7 @@ function SignUp(){
                                 id="cmbCitySignUp"
                                 label="Cidade"
                                 options={(municipios.length === 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
+                                enabled={false}
                                 value={(city === "") ? "Selecione primeiro um UF..." : city}
                                 setValue={setCity}
                                 />
@@ -379,6 +395,7 @@ function SignUp(){
                                 label="Bairro"
                                 placeholder="Digite seu bairro..."
                                 type="text"
+                                enabled={false}
                                 value={neighborhood}
                                 setValue={setNeighborhood}
                                 />
@@ -388,6 +405,8 @@ function SignUp(){
                                     label="Logradouro"
                                     placeholder="Digite seu logradouro..."
                                     type="text"
+                                    enabled={false}
+                                    size="medium"
                                     value={address}
                                     setValue={setAddress}
                                     />
@@ -396,6 +415,8 @@ function SignUp(){
                                     label="Nº"
                                     placeholder="XXX"
                                     type="text"
+                                    enabled={true}
+                                    size="small"
                                     mask="99999"
                                     maskChar=""
                                     value={number}

@@ -40,14 +40,20 @@ function Login(){
             apiKitsune.post('/donators/login', {
                 "email": email,
                 "password": password
-            }).then((res) =>{
+            }).then(res =>{
                 if (res.status === 200) {
-                    navigate("/dog");
+                    localStorage.setItem("user", JSON.stringify(res.data));
+                    localStorage.setItem("pass", password)
+                    navigate("/");
                 }else{
                     console.log(res);
                 }
-            }).catch((err) =>{
-                console.error(err);
+            }).catch(err =>{
+                if (err.response.status === 404) {
+                    alert("Usuário ou senha inválidos!");
+                }else{
+                    console.error(err);
+                }
             }).finally(() => {
                 setLoading(false);
             })
@@ -66,6 +72,7 @@ function Login(){
                         label="Email"
                         placeholder="Digite seu email..."
                         type="email"
+                        enabled={true}
                         value={email}
                         setValue={setEmail}
                     />
@@ -74,6 +81,7 @@ function Login(){
                         label="Senha"
                         placeholder="Digite sua senha..."
                         type="password"
+                        enabled={true}
                         value={password}
                         setValue={setPassword}
                     />

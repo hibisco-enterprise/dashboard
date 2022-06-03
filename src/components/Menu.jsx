@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 import homeIcon from "../assets/img/home.svg";
 import homeSelectedIcon from "../assets/img/home-selected.svg";
@@ -20,9 +21,40 @@ import historySelectedIcon from "../assets/img/history-selected.svg";
 
 import logoffIcon from "../assets/img/logoff.svg";
 
+import {apiKitsune} from "../apis";
+
 function MenuDonator(props) {
 
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("user") === null) {
+            alert("Você precisa primeiro se logar!");
+            navigate("/login");
+        }
+    }, []);
+
+    function logoff(){
+        setLoading(true);
+        if (localStorage.getItem("user") !== null) {
+            const idUser = JSON.parse(localStorage.user).user.idUser;
+            apiKitsune.delete(`/donators/logoff/${idUser}`
+            ).then(res =>{
+                if (res.status === 200) {
+                    localStorage.removeItem("user");
+                    navigate("/login");
+                }else{
+                    console.log(res);
+                }
+            }).catch(err =>{
+                console.error(err);
+            }).finally(() => {
+                setLoading(false);
+            })
+        }
+    }
     
     return(
 
@@ -68,11 +100,12 @@ function MenuDonator(props) {
                 </div>
             </div>
             <div>
-                <div className="menuOption" onClick={() => navigate("/login")}>
+                <div className="menuOption" onClick={() => logoff()}>
                     <img src={logoffIcon} alt="Logoff Icon" />
                     <p>Desconectar</p>
                 </div>
             </div>
+            {loading ? <Loading/> : <></>}
         </nav>
 
     )
@@ -81,7 +114,27 @@ function MenuDonator(props) {
 
 function MenuHospital(props) {
 
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
+
+    function logoff(){
+        setLoading(true);
+        const idUser = JSON.parse(localStorage.user).user.idUser;
+        apiKitsune.delete(`/hospital/logoff/${idUser}`
+        ).then(res =>{
+            if (res.status === 200) {
+                localStorage.removeItem("user");
+                navigate("/login");
+            }else{
+                console.log(res);
+            }
+        }).catch(err =>{
+            console.error(err);
+        }).finally(() => {
+            setLoading(false);
+        })
+    }
     
     return(
 
@@ -123,11 +176,12 @@ function MenuHospital(props) {
                 </div>
             </div>
             <div>
-                <div className="menuOption" onClick={() => navigate("/login")}>
+                <div className="menuOption" onClick={() => logoff()}>
                     <img src={logoffIcon} alt="Logoff Icon" />
                     <p>Desconectar</p>
                 </div>
             </div>
+            {loading ? <Loading/> : <></>}
         </nav>
 
     )

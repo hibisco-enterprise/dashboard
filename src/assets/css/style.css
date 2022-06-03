@@ -95,23 +95,11 @@ a {
     border: 1px solid black;
 }
 
-#cmbBloodTypeSignUp {
-    width: 64px;
-}
-
-#txtCEPSignUp {
+.input .medium {
     width: 276px;
 }
 
-#cmbUFSignUp {
-    width: 64px;
-}
-
-#txtAddressSignUp {
-    width: 276px;
-}
-
-#txtNumberSignUp {
+.input .small {
     width: 64px;
 }
 
@@ -203,7 +191,7 @@ a {
     align-items: center;
     justify-content: center;
     position: fixed;
-    z-index: 100000;
+    z-index: 1000000;
     left: 0;
     top: 0;
     width: 100%;
@@ -367,30 +355,34 @@ a {
     width: 276px;
 }
 
-.profileData .button {
-    margin-left: 608px;
-    align-self: flex-start;
+.profileButton {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profileButton .button {
     width: 128px;
+    margin-right: 32px;
+}
+
+#btnCancelProfile {
+    height: 30px;
+    border: #F9361B solid 1px;
+    background-color: #FFFFFF;
+    color: #F9361B;
+    margin-right: 16px;
+}
+
+#btnCancelAddress {
+    height: 30px;
+    border: #F9361B solid 1px;
+    background-color: #FFFFFF;
+    color: #F9361B;
+    margin-right: 16px;
 }
 
 .profileData .button img {
     margin-right: 8px;
-}
-
-#cmbBloodTypeProfile {
-    width: 64px;
-}
-
-#txtCEPProfile {
-    width: 276px;
-}
-
-#cmbUFProfile {
-    width: 64px;
-}
-
-#txtNumberProfile {
-    width: 64px;
 }
 
 .minicard {
