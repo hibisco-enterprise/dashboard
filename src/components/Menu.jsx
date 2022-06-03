@@ -44,7 +44,7 @@ function MenuDonator(props) {
             ).then(res =>{
                 if (res.status === 200) {
                     localStorage.removeItem("user");
-                    navigate("/login");
+                    navigate("/donator/login");
                 }else{
                     console.log(res);
                 }
@@ -69,7 +69,7 @@ function MenuDonator(props) {
                     </div>
                 </div>
                 <div style={{marginTop:'36px'}}>
-                    <div className={(props.selected !== "home") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/")}>
+                    <div className={(props.selected !== "home") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/map")}>
                         <img src={(props.selected !== "home") ? homeIcon : homeSelectedIcon} alt="Home Icon" />
                         <p>Início</p>
                     </div>
@@ -125,7 +125,7 @@ function MenuHospital(props) {
         ).then(res =>{
             if (res.status === 200) {
                 localStorage.removeItem("user");
-                navigate("/login");
+                navigate("/hospital/login");
             }else{
                 console.log(res);
             }

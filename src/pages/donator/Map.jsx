@@ -2,7 +2,7 @@ import React from "react";
 import {MenuDonator} from "../../components/Menu";
 import Modal from "../../components/Modal";
 
-export default function Index() {
+export default function Map() {
 
     return(
         <div className="dashboard">
