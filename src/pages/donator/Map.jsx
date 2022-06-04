@@ -7,15 +7,16 @@ import MapBox, { Marker, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { apiKitsune } from '../../apis';
 
-export default function Map () {
+export default function Map() {
     const [pins, setPins] = useState([]);
-    const [currentPlaceId, setCurrentPlaceId] = useState(1);
+    const [currentPin, setCurrentPin] = useState(null);
+    // const [isModalVisible, setIsModalVisible] = useState(false);
     const [viewPort, setViewPort] = useState({
         latitude: -23.555702209472656,
         longitude: -46.659706115722656,
         zoom: 14
     })
-    
+
     React.useEffect(() => {
         apiKitsune.get("/hospitals").then((res) => {
             var longLatArray = [];
@@ -32,6 +33,7 @@ export default function Map () {
                 var address = res.data[i].user.address.address
                 var number = res.data[i].user.address.number
                 var objHospital = {
+                    index: i,
                     idUser: idUser,
                     name: name,
                     phone: phone,
@@ -51,10 +53,8 @@ export default function Map () {
     }, []);
 
 
-    const handleMarkerClick = (id) => {
-        alert(id);
-        alert(currentPlaceId);
-        setCurrentPlaceId(id);
+    const handleMarkerClick = (index) => {
+        setCurrentPin(pins[index])
     };
 
     return (
@@ -75,31 +75,23 @@ export default function Map () {
                                         latitude={pins.latitude}
                                         anchor="right"
                                         color='#F9361B'
-                                        onClick={() => handleMarkerClick(pins.idUser)}
+                                        onClick={() => handleMarkerClick(pins.index)}
                                     >
-                                        {/* <img src={mapMarker} /> */}
                                     </Marker>
-                                    {
-                                        pins.idUser === currentPlaceId && (
-                                            <Popup
-                                                longitude={pins.longitude}
-                                                latitude={pins.latitude}
-                                                anchor="left"
-                                                onClose={() => setCurrentPlaceId(null)}
-                                            >
-                                                <Modal
-                                                    photo="https://www.pc.rs.gov.br/upload/recortes/202201/21121934_439618_GD.jpg"
-                                                    name="Cativeiro do Caralho nessa porra"
-                                                    address="Rua meu pau quadrado"
-                                                    tel="(11) 8328-9214"
-                                                />
-                                            </Popup>
-                                        )}
                                 </>
                             ))
                         }
                     </MapBox>
                 </div>
+                {currentPin != null ?
+                    <Modal
+                        photo="https://www.pc.rs.gov.br/upload/recortes/202201/21121934_439618_GD.jpg"
+                        name={currentPin.name}
+                        address={currentPin.address}
+                        tel={currentPin.phone}
+                        closeFunction = {() => setCurrentPin(null)}
+                    /> :
+                    <></>}
             </div>
         </>
     );

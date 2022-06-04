@@ -28,7 +28,7 @@ export default function Modal(props) {
             <div className="modalContent">
                 <div className="modalLocalPhoto">
                     <div className="circularIconButton">
-                        <img src={closeIcon} alt="Close icon" />
+                        <img src={closeIcon} alt="Close icon" onClick={props.closeFunction}/>
                     </div>
                 </div>
 
