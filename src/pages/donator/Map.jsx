@@ -10,7 +10,6 @@ import { apiKitsune } from '../../apis';
 export default function Map() {
     const [pins, setPins] = useState([]);
     const [currentPin, setCurrentPin] = useState(null);
-    // const [isModalVisible, setIsModalVisible] = useState(false);
     const [viewPort, setViewPort] = useState({
         latitude: -23.555702209472656,
         longitude: -46.659706115722656,
