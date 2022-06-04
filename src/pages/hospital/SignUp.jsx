@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {TopBar, BottomBar} from "../components/InicialBar";
-import {Input, Select} from "../components/Input";
-import {CardButton} from "../components/Button";
-import Loading from "../components/Loading";
+import {TopBar, BottomBar} from "../../components/InicialBar";
+import {Input, Select} from "../../components/Input";
+import {CardButton} from "../../components/Button";
+import Loading from "../../components/Loading";
 
-import {apiIBGE, apiViaCep, apiKitsune} from "../apis";
+import {apiIBGE, apiViaCep, apiKitsune} from "../../apis";
 
-function SignUp(){
+function SignUpHospital(){
 
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -17,9 +17,8 @@ function SignUp(){
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const [name, setName] = useState("");
-    const [cpf, setCPF] = useState("");
+    const [cnpj, setCNPJ] = useState("");
     const [telephone, setTelephone] = useState("");
-    const [bloodType, setBloodType] = useState("O+");
 
     const [cep, setCEP] = useState("");
     const [uf, setUF] = useState("AC");
@@ -55,7 +54,7 @@ function SignUp(){
     const [validCEP, setValidCEP] = useState(false);
     useEffect(() => {
         if(cep !== "" && cep.indexOf('_') < 0){
-            apiViaCep.get(`${cep}/json`).then((res) =>{
+            apiViaCep.get(`${cep}/json`).then(res =>{
                 if(res.data.erro){
                     setValidCEP(false);
                     setUF("");
@@ -100,28 +99,58 @@ function SignUp(){
 
     const navigate = useNavigate();
 
-    function validateCPF(strCPF) {
+    function validateCNPJ(strCNPJ) {
         
-        strCPF = strCPF.replaceAll(".", "");
-        strCPF = strCPF.replace("-", "");
-
-        var soma;
-        var resto;
+        strCNPJ = strCNPJ.replace(/[^\d]+/g,'');
+ 
+        if(strCNPJ == '') return false;
+        
+        if (strCNPJ.length != 14)
+            return false;
+    
+        // Elimina CNPJs invalidos conhecidos
+        if (strCNPJ == "00000000000000" || 
+            strCNPJ == "11111111111111" || 
+            strCNPJ == "22222222222222" || 
+            strCNPJ == "33333333333333" || 
+            strCNPJ == "44444444444444" || 
+            strCNPJ == "55555555555555" || 
+            strCNPJ == "66666666666666" || 
+            strCNPJ == "77777777777777" || 
+            strCNPJ == "88888888888888" || 
+            strCNPJ == "99999999999999")
+            return false;
+           
+        var tamanho, numeros, digitos, soma, pos, resultado;
+        
+        // Valida DVs
+        tamanho = strCNPJ.length - 2
+        numeros = strCNPJ.substring(0,tamanho);
+        digitos = strCNPJ.substring(tamanho);
         soma = 0;
-      if (strCPF === "00000000000") return false;
-    
-      for (var i=1; i<=9; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
-      resto = (soma * 10) % 11;
-    
-        if ((resto === 10) || (resto === 11))  resto = 0;
-        if (resto !== parseInt(strCPF.substring(9, 10)) ) return false;
-    
-      soma = 0;
-        for (var j = 1; j <= 10; j++) soma = soma + parseInt(strCPF.substring(j-1, j)) * (12 - j);
-        resto = (soma * 10) % 11;
-    
-        if ((resto === 10) || (resto === 11))  resto = 0;
-        if (resto !== parseInt(strCPF.substring(10, 11) ) ) return false;
+        pos = tamanho - 7;
+        for (var i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+                pos = 9;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(0))
+            return false;
+            
+        tamanho = tamanho + 1;
+        numeros = strCNPJ.substring(0,tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+        for (var i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+                pos = 9;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(1))
+            return false;
+            
         return true;
     }
 
@@ -166,10 +195,10 @@ function SignUp(){
         if(name.trim() !== ""){
             //valid name
 
-            if (validateCPF(cpf)) {
-                //valid cpf
+            if (validateCNPJ(cnpj)) {
+                //valid cnpj
 
-                if (telephone.match(/^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/)) {
+                if (telephone.match(/\(\d{2}\)\s\d{4,5}\-\d{4}$/)) {
                     //valid telephone
 
                     return true;
@@ -178,7 +207,7 @@ function SignUp(){
                     return false;
                 }
             } else {
-                alert("O CPF é inválido! Verifique-o e tente novamente.");
+                alert("O CNPJ é inválido! Verifique-o e tente novamente.");
                 return false;
             }
         } else {
@@ -223,13 +252,13 @@ function SignUp(){
         const isValid = validateThirdStep();
         if(isValid){
             setLoading(true);
-            apiKitsune.post('/donators/register', 
-            {
-                "bloodType": bloodType,
+
+            const obj = {
                 "user": {
                     "email": email,
-                    "documentNumber": cpf,
+                    "documentNumber": cnpj,
                     "password": password,
+                    "name": name,
                     "phone": telephone,
                     "address": {
                         "address": address,
@@ -241,14 +270,18 @@ function SignUp(){
                     }
                 }
             }
-            ).then((res) =>{
+
+            console.log(obj);
+
+            apiKitsune.post('/hospitals/register', obj
+            ).then(res =>{
                 if (res.status === 201) {
-                    navigate("/login");
+                    navigate("/hospital/login");
                 }else{
                     console.log(res);
                 }
-            }).catch((err) =>{
-                console.error(err);
+            }).catch(err =>{
+                console.error(err.response);
             }).finally(() => {
                 setLoading(false);
             })
@@ -272,137 +305,146 @@ function SignUp(){
 
                     {step === 1 ?
 
-                        <div id="signUpStep1">
+                        <div id="signUpHospitalStep1">
                             <Input
-                                id="txtEmailSignUp"
+                                id="txtEmailSignUpHospital"
                                 label="Email"
                                 placeholder="Digite seu email..."
                                 type="email"
+                                enabled={true}
                                 value={email}
                                 setValue={setEmail}
                                 />
                             <Input
-                                id="txtPasswordSignUp"
+                                id="txtPasswordSignUpHospital"
                                 label="Senha"
                                 placeholder="Digite sua senha..."
                                 type="password"
+                                enabled={true}
                                 value={password}
                                 setValue={setPassword}
                                 />
                             <Input
-                                id="txtConfirmPasswordSignUp"
+                                id="txtConfirmPasswordSignUpHospital"
                                 label="Confirme sua senha"
                                 placeholder="Digite sua senha novamente..."
                                 type="password"
+                                enabled={true}
                                 value={confirmPassword}
                                 setValue={setConfirmPassword}
                                 />
-                            <CardButton label="Próximo" id="btnNextSignUpStep1" eventClick={() => goToStep2()}/>
+                            <CardButton label="Próximo" id="btnNextSignUpHospitalStep1" eventClick={() => goToStep2()}/>
                             <p>Já possui uma conta?</p>
-                            <p><a href="/#" onClick={() => navigate("/login")}>Entre</a></p>
+                            <p><a onClick={() => navigate("/donator/login")}>Entre</a></p>
                         </div>
 
                     : step === 2 ? 
 
-                        <div id="signUpStep2">
+                        <div id="signUpHospitalStep2">
                             <Input
-                                id="txtNameSignUp"
-                                label="Nome"
+                                id="txtNameSignUpHospital"
+                                label="Nome do hospital"
                                 placeholder="Digite seu nome..."
                                 type="text"
+                                enabled={true}
                                 value={name}
                                 setValue={setName}
                                 />
                             <Input
-                                id="txtCPFSignUp"
-                                label="CPF"
-                                placeholder="Digite seu CPF..."
+                                id="txtCNPJSignUpHospital"
+                                label="CNPJ"
+                                placeholder="Digite o CNPJ do hospital..."
                                 type="text"
-                                mask="999.999.999-99"
+                                enabled={true}
+                                mask="99.999.999/9999-99"
                                 maskChar="_"
-                                value={cpf}
-                                setValue={setCPF}
+                                value={cnpj}
+                                setValue={setCNPJ}
                                 />
                             <Input
-                                id="txtTelephoneSignUp"
+                                id="txtTelephoneSignUpHospital"
                                 label="Telefone"
-                                placeholder="Digite seu telefone..."
+                                placeholder="Digite o telefone do hospital..."
                                 type="tel"
-                                mask="(99) \99999-9999"
+                                enabled={true}
+                                mask="(99) 9999-9999"
                                 maskChar="_"
                                 value={telephone}
                                 setValue={setTelephone}
                                 />
                             <div>
-                            <Select
-                                id="cmbBloodTypeSignUp"
-                                label="Tipo Sanguíneo"
-                                options={["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]}
-                                value={bloodType}
-                                setValue={setBloodType}
-                                />
                             </div>
-                            <CardButton label="Próximo" id="btnNextSignUpStep2" eventClick={() => goToStep3()}/>
+                            <CardButton label="Próximo" id="btnNextSignUpHospitalStep2" eventClick={() => goToStep3()}/>
                         </div>
 
                     : step === 3 ?
 
-                        <div id="signUpStep3">
+                        <div id="signUpHospitalStep3">
                             <div className="horizontal">
                                 <Input
-                                    id="txtCEPSignUp"
+                                    id="txtCEPSignUpHospital"
                                     label="CEP"
-                                    placeholder="Digite seu CEP..."
+                                    placeholder="Digite o CEP do hospital..."
                                     type="text"
+                                    enabled={true}
+                                    size="medium"
                                     mask="99999-999"
                                     maskChar="_"
                                     value={cep}
                                     setValue={setCEP}
                                     />
                                 <Select
-                                    id="cmbUFSignUp"
+                                    id="cmbUFSignUpHospital"
                                     label="UF"
                                     options={estados.map(estado => (estado.sigla))}
+                                    enabled={false}
+                                    size="small"
                                     value={uf}
                                     setValue={setUF}
                                     />
                             </div>
                             <Select
-                                id="cmbCitySignUp"
+                                id="cmbCitySignUpHospital"
                                 label="Cidade"
                                 options={(municipios.length === 0) ? ["Selecione primeiro um UF..."] : municipios.map(municipio => (municipio.nome))}
+                                enabled={false}
                                 value={(city === "") ? "Selecione primeiro um UF..." : city}
                                 setValue={setCity}
                                 />
                             <Input
-                                id="txtNeighborhoodSignUp"
+                                id="txtNeighborhoodSignUpHospital"
                                 label="Bairro"
-                                placeholder="Digite seu bairro..."
+                                placeholder="Digite o bairro do hospital..."
                                 type="text"
+                                enabled={false}
                                 value={neighborhood}
                                 setValue={setNeighborhood}
                                 />
                             <div className="horizontal">
                                 <Input
-                                    id="txtAddressSignUp"
-                                    label="Logradouro"
-                                    placeholder="Digite seu logradouro..."
+                                    id="txtAddressSignUpHospital"
+                                    label="Endereço"
+                                    placeholder="Digite o endereço do hospital..."
                                     type="text"
+                                    enabled={false}
+                                    size="medium"
                                     value={address}
                                     setValue={setAddress}
                                     />
                                 <Input
-                                    id="txtNumberSignUp"
+                                    id="txtNumberSignUpHospital"
                                     label="Nº"
                                     placeholder="XXX"
                                     type="text"
+                                    enabled={true}
+                                    size="small"
                                     mask="99999"
                                     maskChar=""
                                     value={number}
                                     setValue={setNumber}
                                     />
                             </div>
-                            <CardButton label="Finalizar" id="btnNextSignUpStep3" eventClick={() => finishSignUp()}/>
+                            <CardButton label="Finalizar" id="btnNextSignUpHospitalStep3" eventClick={() => finishSignUp()}/>
                         </div>
 
                     : <></>}
@@ -415,4 +457,4 @@ function SignUp(){
     );
 }
 
-export default SignUp;
+export default SignUpHospital;

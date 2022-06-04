@@ -1,101 +1,45 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { MenuDonator } from "../components/Menu";
-import Map, { Marker, Popup } from 'react-map-gl';
-// import mapMarker from "../assets/img/elipse.svg";
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { apiKitsune } from '../apis';
+import React from "react";
+import {useNavigate} from "react-router-dom";
+import {TopBar, BottomBar} from "../components/InicialBar";
+
+import peopleImg from "../assets/img/people.svg"
+import medicineImg from "../assets/img/medicine.svg"
 
 export default function Index() {
-    const [pins, setPins] = useState([]);
-    const [currentPlaceId, setCurrentPlaceId] = useState(1);
-    const [viewPort, setViewPort] = useState({
-        latitude: -23.555702209472656,
-        longitude: -46.659706115722656,
-        zoom: 14
-    })
+    const navigate = useNavigate();
 
-    React.useEffect(() => {
-        apiKitsune.get("/hospitals").then((res) => {
-            var longLatArray = [];
-            console.log("raw response");
-            console.log(res);
-            console.log('data length ' + res.data.length);
-
-            for (var i = 0; i < res.data.length; i++) {
-                var idUser = res.data[i].user.idUser;
-                var longitude = res.data[i].user.address.longitude;
-                var latitude = res.data[i].user.address.latitude;
-                var name = res.data[i].user.name;
-                var phone = res.data[i].user.phone;
-                var address = res.data[i].user.address.address
-                var number = res.data[i].user.address.number
-                var objHospital = {
-                    idUser: idUser,
-                    name: name,
-                    phone: phone,
-                    address: address,
-                    number: number,
-                    longitude: longitude,
-                    latitude: latitude
-                }
-                longLatArray.push(objHospital);
-                console.log('latitude and longitude and id', latitude, longitude, idUser, i);
-            }
-
-            setPins(longLatArray);
-        }).catch((error) =>
-            console.log("Error getting hospitals response " + error)
-        );
-    }, []);
-
-
-    const handleMarkerClick = (id) => {
-        alert(id);
-        alert(currentPlaceId);
-        setCurrentPlaceId(id);
-    };
-
-    return (
+    return(
+        
         <>
-            <div className="home-index">
-                <MenuDonator selected="home" />
-                <div className='map-container'>
-                    <Map
-                        initialViewState={viewPort}
-                        style={{ width: '100vw', height: '100vh' }}
-                        mapStyle="mapbox://styles/mapbox/streets-v9"
-                        mapboxAccessToken="pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg">
-                        {
-                            pins.map(pins => (
-                                <>
-                                    <Marker
-                                        longitude={pins.longitude}
-                                        latitude={pins.latitude}
-                                        anchor="right"
-                                        color='#F9361B'
-                                        onClick={() => handleMarkerClick(pins.idUser)}
-                                    >
-                                        {/* <img src={mapMarker} /> */}
-                                    </Marker>
-                                    {
-                                        pins.idUser === currentPlaceId && (
-                                            <Popup
-                                                longitude={pins.longitude}
-                                                latitude={pins.latitude}
-                                                anchor="left"
-                                                onClose={() => setCurrentPlaceId(null)}
-                                            >
-                                                <MenuDonator selected="home" />
-                                            </Popup>
-                                        )}
-                                </>
-                            ))
-                        }
-                    </Map>
-                </div>
-            </div>
-        </>
-    );
+            <TopBar/>
 
-}   
+            <div className="container">
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    <h1 id="titleIndex">Como deseja entrar?</h1>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                        <div className="card cardChoice" onClick={() => navigate("/donator/login")}>
+                            <div className="imgIndex">
+                                <img src={peopleImg} alt="" />
+                            </div>
+                            <h2>Cliente</h2>
+                            <p>Tenha acesso ao mapa de hemocentros próximos, um histórico das suas últimas doações, e um FAQ sobre a doação de sangue.</p>
+                        </div>
+
+                        <div className="card cardChoice redChoice" onClick={() => navigate("hospital/login")}>
+                            <div className="imgIndex">
+                                <img src={medicineImg} alt="" />
+                            </div>
+                            <h2>Hospital</h2>
+                            <p>Tenha acesso a solicitações de agendamento de clientes, seu estoque de sangue, e um histórico das doações no último ano.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <BottomBar/>
+        </>
+
+    )
+
+}

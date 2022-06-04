@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {TopBar, BottomBar} from "../components/InicialBar";
-import {Input} from "../components/Input";
-import {CardButton} from "../components/Button";
-import Loading from "../components/Loading";
+import {TopBar, BottomBar} from "../../components/InicialBar";
+import {Input} from "../../components/Input";
+import {CardButton} from "../../components/Button";
+import Loading from "../../components/Loading";
 
-import {apiKitsune} from "../apis";
+import {apiKitsune} from "../../apis";
 
-function Login(){
+function LoginHospital(){
     const [loading, setLoading] = useState(false);
 
     const [email, setEmail] = useState("");
@@ -37,17 +37,23 @@ function Login(){
         const isValid = validateLogin();
         if(isValid){
             setLoading(true);
-            apiKitsune.post('/donators/login', {
+            apiKitsune.post('/hospitals/login', {
                 "email": email,
                 "password": password
-            }).then((res) =>{
+            }).then(res =>{
                 if (res.status === 200) {
-                    navigate("/dog");
+                    localStorage.setItem("user", JSON.stringify(res.data));
+                    localStorage.setItem("pass", password)
+                    navigate("/hospital/requests");
                 }else{
                     console.log(res);
                 }
-            }).catch((err) =>{
-                console.error(err);
+            }).catch(err =>{
+                if (err.response.status === 404) {
+                    alert("Usuário ou senha inválidos!");
+                }else{
+                    console.error(err);
+                }
             }).finally(() => {
                 setLoading(false);
             })
@@ -60,26 +66,31 @@ function Login(){
 
             <div className="container">
                 <div className="card">
-                    <h1>Entre em sua conta</h1>
+                    <div className="horizontal" style={{marginBottom: '24px'}}>
+                        <h1>Entre em sua conta</h1>
+                        <h1 onClick={() => navigate("/")} className="backArrow">↩</h1>
+                    </div>
                     <Input
-                        id="txtEmailLogin"
+                        id="txtEmailLoginHospital"
                         label="Email"
                         placeholder="Digite seu email..."
                         type="email"
+                        enabled={true}
                         value={email}
                         setValue={setEmail}
                     />
                     <Input
-                        id="txtPasswordLogin"
+                        id="txtPasswordLoginHospital"
                         label="Senha"
                         placeholder="Digite sua senha..."
                         type="password"
+                        enabled={true}
                         value={password}
                         setValue={setPassword}
                     />
-                    <CardButton label="Entrar" id="btnLogin" eventClick={() => doLogin()}/>
+                    <CardButton label="Entrar" id="btnLoginHospital" eventClick={() => doLogin()}/>
                     <p>Não possui uma conta?</p>
-                    <p><a onClick={() =>navigate("/signup")}>Criar uma conta</a></p>
+                    <p><a onClick={() =>navigate("/hospital/signup")}>Criar uma conta</a></p>
                 </div>
             </div>
 
@@ -89,4 +100,4 @@ function Login(){
     );
 }
 
-export default Login;
+export default LoginHospital;

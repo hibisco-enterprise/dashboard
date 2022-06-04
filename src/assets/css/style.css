@@ -36,6 +36,13 @@ a {
     height: calc(100vh - 73px - 73px);
 }
 
+#titleIndex {
+    font-weight: 500;
+    font-size: 32px;
+    color: #343A40;
+    margin-bottom: 24px;
+}
+
 .card {
     padding: 32px 24px;
     background: white;
@@ -48,6 +55,43 @@ a {
     font-size: 32px;
     color: #343A40;
     margin-bottom: 24px;
+}
+
+.cardChoice {
+    margin: 0 32px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 256px;
+    color: #343A40;
+    border-radius: 6px;
+}
+
+.cardChoice .imgIndex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 256px;
+    height: 196px;
+    margin-bottom: 16px;
+}
+
+.cardChoice .imgIndex img {
+    width: 256px;
+}
+
+.cardChoice h2 {
+    font-weight: 500;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.redChoice {
+    background-color: #F9361B;
+    color: #FFFFFF;
+}
+
+.redChoice p {
+    color: #FFFFFF !important;
 }
 
 .input {
@@ -75,7 +119,7 @@ a {
     font-family: 'Outfit', sans-serif;
 }
 
-.input input:focus{
+.input input:focus {
     border: 1px solid black;
 }
 
@@ -91,27 +135,15 @@ a {
     font-family: 'Outfit', sans-serif;
 }
 
-.input select:focus{
+.input select:focus {
     border: 1px solid black;
 }
 
-#cmbBloodTypeSignUp{
-    width: 64px;
-}
-
-#txtCEPSignUp{
+.input .medium {
     width: 276px;
 }
 
-#cmbUFSignUp{
-    width: 64px;
-}
-
-#txtAddressSignUp{
-    width: 276px;
-}
-
-#txtNumberSignUp{
+.input .small {
     width: 64px;
 }
 
@@ -134,8 +166,12 @@ a {
     margin-bottom: 20px;
 }
 
-#btnLogin {
-    margin-top: 112px;
+#btnLoginDonator {
+    margin-top: 105px;
+}
+
+#btnLoginHospital {
+    margin-top: 105px;
 }
 
 .card p {
@@ -155,22 +191,26 @@ a {
     flex-direction: row;
 }
 
-.card .horizontal{
+.card .horizontal {
     justify-content: space-between;
     align-items: center;
 }
 
-.card .horizontal h1{
+.card .horizontal h1 {
     margin-bottom: 0;
 }
 
-.steps{
+.backArrow {
+    cursor: pointer;
+}
+
+.steps {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.steps .step{
+.steps .step {
     border-radius: 100px;
     margin-left: 6px;
     height: 12px;
@@ -179,42 +219,56 @@ a {
     transition: 0.25s;
 }
 
-.steps .currentStep{
+.steps .currentStep {
     width: 24px;
     background-color: #F9361B;
 }
 
-#btnNextSignUpStep1{
+#btnNextSignUpDonatorStep1 {
     margin-top: 32px;
 }
 
-#btnNextSignUpStep2{
+#btnNextSignUpHospitalStep1 {
+    margin-top: 32px;
+}
+
+#btnNextSignUpDonatorStep2 {
     margin-top: 26px;
     margin-bottom: 0;
 }
 
-#btnNextSignUpStep3{
+#btnNextSignUpHospitalStep2 {
+    margin-top: 99px;
+    margin-bottom: 0;
+}
+
+#btnNextSignUpDonatorStep3 {
     margin-top: 10px;
     margin-bottom: 0;
 }
 
-.modal{
+#btnNextSignUpHospitalStep3 {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.modal {
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
-    z-index: 100000;
+    z-index: 1000000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(255,255,255, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .dashboard {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
 }
 
 .menu {
@@ -228,7 +282,7 @@ a {
     padding: 32px 24px;
 }
 
-.menu .horizontal{
+.menu .horizontal {
     justify-content: space-between;
     align-items: center;
     margin-right: 24px;
@@ -262,7 +316,7 @@ a {
     margin-right: 24px;
 }
 
-.menuOption:hover{
+.menuOption:hover {
     background-color: #F9361B18;
 }
 
@@ -297,15 +351,13 @@ a {
 .section {
     width: 100%;
     height: calc(100vh - 64px - 64px);
-    margin-left: 32px;
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding: 64px 32px;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.section::-webkit-scrollbar{
+.section::-webkit-scrollbar {
     display: none;
 }
 
@@ -322,9 +374,10 @@ a {
     font-weight: 500;
     font-size: 24px;
     line-height: 125%;
+    margin-bottom: 16px;
 }
 
-.profileViewer{
+.profileViewer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -348,7 +401,7 @@ a {
     font-weight: 400;
     font-size: 16px;
     line-height: 125%;
-    margin-top: 8px
+    margin-top: -8px;
 }
 
 .sectionContent {
@@ -360,34 +413,236 @@ a {
     width: fit-content;
 }
 
-.profileData .input{
+.profileData .input {
     margin-right: 32px;
 }
 
-.profileData .input input[type="tel"]{
+.profileData .input input[type="tel"] {
     width: 276px;
 }
 
-.profileData .button{
-    margin-left: 608px;
+.profileButton {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profileButton .button {
+    width: 128px;
+    margin-right: 32px;
+}
+
+#btnCancelProfile {
+    height: 30px;
+    border: #F9361B solid 1px;
+    background-color: #FFFFFF;
+    color: #F9361B;
+    margin-right: 16px;
+}
+
+#btnCancelAddress {
+    height: 30px;
+    border: #F9361B solid 1px;
+    background-color: #FFFFFF;
+    color: #F9361B;
+    margin-right: 16px;
+}
+
+.profileData .button img {
+    margin-right: 8px;
+}
+
+.minicard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    width: 256px;
+    background: #FFFFFF;
+    box-shadow: 0px 7px 30px rgba(43, 37, 63, 0.2);
+    border-radius: 4px;
+    padding: 0 24px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.minicard p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #F9361B;
+    text-align: center;
+}
+
+.minicard span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #F9361B;
+}
+
+.minicard h4 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40;
+    max-width: 192px;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 125%;
+    color: #495057;
+    margin-bottom: 4px;
+}
+
+.queueDiv {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.sectionFAQ {
+    padding-bottom: 64px;
+}
+
+.question {
+    background: rgba(157, 157, 157, 0.15);
+    padding: 24px 32px;
+    border-radius: 8px;
+    transition: 0.25s;
+    margin-right: 64px;
+    height: 100%;
+    margin-bottom: 24px;
+}
+
+.question .horizontal {
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.question h3 {
+    margin-bottom: 0;
+}
+
+.question img {
+    transition: 0.25s;
+    user-select: none;
+}
+
+.question p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 1px;
+    color: #716F7A;
+    transition: 0.25s;
+    overflow-x: hidden;
+    max-height: 0px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.question p::-webkit-scrollbar {
+    display: none;
+}
+
+.questionOpened {
+    transition: 0.25s;
+}
+
+.questionOpened img {
+    transform: rotate(180deg);
+}
+
+.questionOpened p {
+    padding-top: 32px;
+    max-height: 256px;
+    transition: 0.25s;
+}
+
+.minicard img {
+    height: 32px;
+    width: 32px;
+    margin-right: 24px;
+    border-radius: 50%;
+}
+
+.slider {
+    align-items: center;
+}
+
+.slider p {
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40;
+    min-width: 40px;
+}
+
+.MuiSlider-root {
+    width: 320px !important;
+    margin: 24px !important;
+}
+
+.MuiSlider-colorPrimary {
+    color: #F9361B !important
+}
+
+.MuiSlider-thumb {
+    height: 12px !important;
+    width: 12px !important;
+}
+
+.bloodStock .button {
+    margin-top: 16px;
+    margin-left: 816px;
     align-self: flex-start;
     width: 128px;
 }
 
-.profileData .button img{
-    margin-right: 8px;
+.modalBlack {
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-#cmbBloodTypeProfile{
-    width: 64px;
+.modalContent {
+    float: right;
+    background: #FFFFFF;
+    border-radius: 4px;
+    margin: 1.5% 1.5% 0 0;
+    width: 432px;
 }
 
-#txtCEPProfile{
-    width: 276px;
+.modalLocalPhoto {
+    background: url("https://www.pc.rs.gov.br/upload/recortes/202201/21121934_439618_GD.jpg");
+    max-width: 432px;
+    height: calc(432px * 9 / 16);
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: flex-end;
 }
 
-#cmbUFProfile{
-    width: 64px;
+.circularIconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    margin-left: 4px;
 }
 
 .home-index {
@@ -419,41 +674,95 @@ a {
     cursor: pointer;
   }
 
-/* @media (max-height: 700px) {
-    .inicialBar{
-        height: 48px;
-    }
 
-    .container{
-        height: calc(100vh - 49px - 49px);
-    }
+.circularIconButton img {
+    height: 16px;
+    width: 16px;
+    margin: 0;
+}
 
-    .card h1{
-        font-size: 24px;
-    }
+.modalLocalPhoto .circularIconButton {
+    margin-top: 16px;
+    margin-right: 20px;
+}
 
-    .input{
-        margin-bottom: 8px;
-    }
+.modalText {
+    padding: 20px;
+}
 
-    .input label{
-        font-size: 16px;
-    }
+.modalText h2 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 125%;
+    color: #343A40;
+    margin-bottom: 8px;
+}
 
-    .input input{
-        font-size: 12px;
-        width: 288px;
-    }
+.modalText .horizontal {
+    margin-bottom: 8px;
+}
 
-    .button {
-        font-size: 14px;
-    }
+.modalText p {
+    font-size: 16px;
+    line-height: 125%;
+    color: #7B7B7B;
+    margin-left: 8px;
+}
 
-    #btnLogin{
-        margin-top: 104px;
-    }
+.bloodCards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
 
-    .card p{
-        font-size: 14px;
-    }
-} */
+.bloodCard {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgb(149, 149, 149, 0.1);
+    border-radius: 4px;
+    width: 94px;
+    height: 56px;
+    margin-top: 8px;
+}
+
+.bloodCard img {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.bloodCard h3 {
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40
+}
+
+.bloodCard h4 {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 125%;
+    color: #343A40;
+    margin-top: 6px;
+}
+
+.availableTime {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 94px;
+    height: 56px;
+    background-color: rgb(149, 149, 149, 0.1);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: #343A40;
+}
+
+.availableTime img {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    margin-left: 50px;
+}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 import homeIcon from "../assets/img/home.svg";
 import homeSelectedIcon from "../assets/img/home-selected.svg";
@@ -7,9 +8,9 @@ import profileIcon from "../assets/img/profile.svg";
 import profileSelectedIcon from "../assets/img/profile-selected.svg";
 import faqIcon from "../assets/img/faq.svg";
 import faqSelectedIcon from "../assets/img/faq-selected.svg";
-import bellIcon from "../assets/img/bell.svg";
-import bellSelectedIcon from "../assets/img/bell-selected.svg";
-import gearIcon from "../assets/img/gear.svg";
+// import bellIcon from "../assets/img/bell.svg";
+// import bellSelectedIcon from "../assets/img/bell-selected.svg";
+// import gearIcon from "../assets/img/gear.svg";
 
 import scheduleIcon from "../assets/img/schedule.svg";
 import scheduleSelectedIcon from "../assets/img/schedule-selected.svg";
@@ -20,9 +21,40 @@ import historySelectedIcon from "../assets/img/history-selected.svg";
 
 import logoffIcon from "../assets/img/logoff.svg";
 
+import {apiKitsune} from "../apis";
+
 function MenuDonator(props) {
 
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localStorage.getItem("user") === null) {
+            alert("Você precisa primeiro se logar!");
+            navigate("/login");
+        }
+    }, []);
+
+    function logoff(){
+        setLoading(true);
+        if (localStorage.getItem("user") !== null) {
+            const idUser = JSON.parse(localStorage.user).user.idUser;
+            apiKitsune.delete(`/donators/logoff/${idUser}`
+            ).then(res =>{
+                if (res.status === 200) {
+                    localStorage.removeItem("user");
+                    navigate("/donator/login");
+                }else{
+                    console.log(res);
+                }
+            }).catch(err =>{
+                console.error(err);
+            }).finally(() => {
+                setLoading(false);
+            })
+        }
+    }
     
     return(
 
@@ -37,24 +69,24 @@ function MenuDonator(props) {
                     </div>
                 </div>
                 <div style={{marginTop:'36px'}}>
-                    <div className={(props.selected !== "home") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/")}>
+                    <div className={(props.selected !== "home") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/map")}>
                         <img src={(props.selected !== "home") ? homeIcon : homeSelectedIcon} alt="Home Icon" />
                         <p>Início</p>
                     </div>
-                    <div className={(props.selected !== "profile") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/profile")}>
+                    <div className={(props.selected !== "profile") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/profile")}>
                         <img src={(props.selected !== "profile") ? profileIcon : profileSelectedIcon} alt="Profile Icon" />
                         <p>Perfil</p>
                     </div>
-                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/history")}>
+                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/history")}>
                         <img src={(props.selected !== "history") ? historyIcon : historySelectedIcon} alt="History Icon" />
                         <p>Histórico</p>
                     </div>
-                    <div className={(props.selected !== "faq") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/faq")}>
+                    <div className={(props.selected !== "faq") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/faq")}>
                         <img src={(props.selected !== "faq") ? faqIcon : faqSelectedIcon} alt="FAQ Icon" />
                         <p>FAQ</p>
                     </div>
 
-                    <div className="menuSeparatorLine"/>
+                    {/* <div className="menuSeparatorLine"/>
 
                     <div className={(props.selected !== "alert") ? "menuOption" : "menuOption menuOptionSelected"}>
                         <img src={(props.selected !== "alert") ? bellIcon : bellSelectedIcon} alt="Alert Icon" />
@@ -64,15 +96,16 @@ function MenuDonator(props) {
                     <div className={(props.selected !== "config") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/config")}>
                         <img src={(props.selected !== "config") ? gearIcon : homeSelectedIcon} alt="Configs Icon" />
                         <p>Configurações</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div>
-                <div className="menuOption" onClick={() => navigate("/login")}>
+                <div className="menuOption" onClick={() => logoff()}>
                     <img src={logoffIcon} alt="Logoff Icon" />
                     <p>Desconectar</p>
                 </div>
             </div>
+            {loading ? <Loading/> : <></>}
         </nav>
 
     )
@@ -81,7 +114,27 @@ function MenuDonator(props) {
 
 function MenuHospital(props) {
 
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
+
+    function logoff(){
+        setLoading(true);
+        const idUser = JSON.parse(localStorage.user).user.idUser;
+        apiKitsune.delete(`/hospitals/logoff/${idUser}`
+        ).then(res =>{
+            if (res.status === 200) {
+                localStorage.removeItem("user");
+                navigate("/hospital/login");
+            }else{
+                console.log(res);
+            }
+        }).catch(err =>{
+            console.error(err);
+        }).finally(() => {
+            setLoading(false);
+        })
+    }
     
     return(
 
@@ -96,11 +149,11 @@ function MenuHospital(props) {
                     </div>
                 </div>
                 <div style={{marginTop:'36px'}}>
-                    <div className={(props.selected !== "requests") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/requests")}>
+                    <div className={(props.selected !== "requests") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/requests")}>
                         <img src={(props.selected !== "requests") ? scheduleIcon : scheduleSelectedIcon} alt="Requests Icon" />
                         <p>Solicitações</p>
                     </div>
-                    <div className={(props.selected !== "stock") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/stock")}>
+                    <div className={(props.selected !== "stock") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/stock")}>
                         <img src={(props.selected !== "stock") ? bloodtypeIcon : bloodtypeSelectedIcon} alt="Stock Icon" />
                         <p>Estoque</p>
                     </div>
@@ -109,7 +162,7 @@ function MenuHospital(props) {
                         <p>Histórico</p>
                     </div>
 
-                    <div className="menuSeparatorLine"/>
+                    {/* <div className="menuSeparatorLine"/>
 
                     <div className={(props.selected !== "alert") ? "menuOption" : "menuOption menuOptionSelected"}>
                         <img src={(props.selected !== "alert") ? bellIcon : bellSelectedIcon} alt="Alert Icon" />
@@ -119,19 +172,20 @@ function MenuHospital(props) {
                     <div className={(props.selected !== "config") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/config")}>
                         <img src={(props.selected !== "config") ? gearIcon : homeSelectedIcon} alt="Configs Icon" />
                         <p>Configurações</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div>
-                <div className="menuOption" onClick={() => navigate("/login")}>
+                <div className="menuOption" onClick={() => logoff()}>
                     <img src={logoffIcon} alt="Logoff Icon" />
                     <p>Desconectar</p>
                 </div>
             </div>
+            {loading ? <Loading/> : <></>}
         </nav>
 
     )
 
 }
 
-export {MenuDonator}
+export {MenuDonator, MenuHospital}
