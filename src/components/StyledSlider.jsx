@@ -9,8 +9,8 @@ export default function StyledSlider(props) {
         <div className="slider horizontal">
             <img src={props.image} />
             <Slider
-                value={value}
-                onChange={e => setValue(e.target.value)}
+                value={props.value}
+                onChange={e => props.setValue(e.target.value)}
                 disabled={!props.enabled}
             />
             <p>{value}%</p>
