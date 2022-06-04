@@ -602,6 +602,14 @@ h3 {
     width: 128px;
 }
 
+#btnCancelStock {
+    height: 30px;
+    border: #F9361B solid 1px;
+    background-color: #FFFFFF;
+    color: #F9361B;
+    margin-right: 16px;
+}
+
 .modalBlack {
     position: fixed;
     z-index: 100000;
@@ -716,6 +724,11 @@ h3 {
     margin-top: 6px;
 }
 
+.availableTimes {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .availableTime {
     display: flex;
     align-items: center;
@@ -728,11 +741,13 @@ h3 {
     font-size: 16px;
     line-height: 125%;
     color: #343A40;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
 }
 
 .availableTime img {
     position: absolute;
-    height: 12px;
-    width: 12px;
-    margin-left: 50px;
+    margin-left: 32px;
+    padding-bottom: 28px;
 }

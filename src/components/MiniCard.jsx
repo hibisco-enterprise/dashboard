@@ -51,8 +51,8 @@ function CardRequest(props) {
             </div>
             <div>
                 <div className="horizontal">
-                    <div className="circularIconButton"><img src={acceptIcon} alt="Accept Icon" /></div>
-                    <div className="circularIconButton"><img src={declineIcon} alt="Decline Icon" /></div>
+                    <div className="circularIconButton" onClick={props.acceptFunction}><img src={acceptIcon} alt="Accept Icon" /></div>
+                    <div className="circularIconButton" onClick={props.declineFunction}><img src={declineIcon} alt="Decline Icon" /></div>
                 </div>
             </div>
         </div>
