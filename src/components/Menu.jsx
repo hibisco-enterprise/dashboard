@@ -121,7 +121,7 @@ function MenuHospital(props) {
     function logoff(){
         setLoading(true);
         const idUser = JSON.parse(localStorage.user).user.idUser;
-        apiKitsune.delete(`/hospital/logoff/${idUser}`
+        apiKitsune.delete(`/hospitals/logoff/${idUser}`
         ).then(res =>{
             if (res.status === 200) {
                 localStorage.removeItem("user");
