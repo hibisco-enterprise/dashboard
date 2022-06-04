@@ -8,9 +8,9 @@ import profileIcon from "../assets/img/profile.svg";
 import profileSelectedIcon from "../assets/img/profile-selected.svg";
 import faqIcon from "../assets/img/faq.svg";
 import faqSelectedIcon from "../assets/img/faq-selected.svg";
-import bellIcon from "../assets/img/bell.svg";
-import bellSelectedIcon from "../assets/img/bell-selected.svg";
-import gearIcon from "../assets/img/gear.svg";
+// import bellIcon from "../assets/img/bell.svg";
+// import bellSelectedIcon from "../assets/img/bell-selected.svg";
+// import gearIcon from "../assets/img/gear.svg";
 
 import scheduleIcon from "../assets/img/schedule.svg";
 import scheduleSelectedIcon from "../assets/img/schedule-selected.svg";
@@ -86,7 +86,7 @@ function MenuDonator(props) {
                         <p>FAQ</p>
                     </div>
 
-                    <div className="menuSeparatorLine"/>
+                    {/* <div className="menuSeparatorLine"/>
 
                     <div className={(props.selected !== "alert") ? "menuOption" : "menuOption menuOptionSelected"}>
                         <img src={(props.selected !== "alert") ? bellIcon : bellSelectedIcon} alt="Alert Icon" />
@@ -96,7 +96,7 @@ function MenuDonator(props) {
                     <div className={(props.selected !== "config") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/donator/config")}>
                         <img src={(props.selected !== "config") ? gearIcon : homeSelectedIcon} alt="Configs Icon" />
                         <p>Configurações</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div>
@@ -162,7 +162,7 @@ function MenuHospital(props) {
                         <p>Histórico</p>
                     </div>
 
-                    <div className="menuSeparatorLine"/>
+                    {/* <div className="menuSeparatorLine"/>
 
                     <div className={(props.selected !== "alert") ? "menuOption" : "menuOption menuOptionSelected"}>
                         <img src={(props.selected !== "alert") ? bellIcon : bellSelectedIcon} alt="Alert Icon" />
@@ -172,7 +172,7 @@ function MenuHospital(props) {
                     <div className={(props.selected !== "config") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/config")}>
                         <img src={(props.selected !== "config") ? gearIcon : homeSelectedIcon} alt="Configs Icon" />
                         <p>Configurações</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div>
