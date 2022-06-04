@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Slider from '@mui/material/Slider';
 
 export default function StyledSlider(props) {
-
-    const [value, setValue] = useState(0);
 
     return(
         <div className="slider horizontal">
@@ -13,7 +11,7 @@ export default function StyledSlider(props) {
                 onChange={e => props.setValue(e.target.value)}
                 disabled={!props.enabled}
             />
-            <p>{value}%</p>
+            <p>{props.value}%</p>
         </div>
     )
 

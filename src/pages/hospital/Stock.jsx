@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {MenuHospital} from "../../components/Menu";
 import StyledChart from "../../components/StyledCharts";
 import StyledSlider from "../../components/StyledSlider"
@@ -18,6 +18,8 @@ import pencilIcon from "../../assets/img/pencil.svg"
 import diskIcon from "../../assets/img/disk.svg"
 import trashIcon from "../../assets/img/trash.svg"
 
+import { apiKitsune } from '../../apis';
+
 
 export default function Stock(props) {
     const [loading, setLoading] = useState(false);
@@ -35,6 +37,25 @@ export default function Stock(props) {
     const [bloodBN, setBloodBN] = useState(0);
     const [bloodBP, setBloodBP] = useState(0);
 
+    useEffect(() => {
+        apiKitsune.get(`/hospitals/blood/${user.idHospital}`
+        ).then(res => {
+            if (res.status === 200) {
+                let responseData = res.data;
+                setBloodON(responseData[0].percentage);
+                setBloodOP(responseData[1].percentage);
+                setBloodABN(responseData[2].percentage);
+                setBloodABP(responseData[3].percentage);
+                setBloodAN(responseData[4].percentage);
+                setBloodAP(responseData[5].percentage);
+                setBloodBN(responseData[6].percentage);
+                setBloodBP(responseData[7].percentage);
+            }
+        }).catch(err => {
+            console.error(err);
+        })
+    }, []);
+
     function editStock(){
         setEditing(true);
     }
@@ -44,7 +65,52 @@ export default function Stock(props) {
     }
 
     function saveStock(){
-        
+        setLoading(true);
+            apiKitsune.put(`/hospitals/blood/${user.idHospital}`, [
+                {
+                    "bloodType": "O-",
+                    "percentage": bloodON
+                },
+                {
+                    "bloodType": "O+",
+                    "percentage": bloodOP
+                },
+                {
+                    "bloodType": "AB-",
+                    "percentage": bloodABN
+                },
+                {
+                    "bloodType": "AB+",
+                    "percentage": bloodABP
+                },
+                {
+                    "bloodType": "A-",
+                    "percentage": bloodAN
+                },
+                {
+                    "bloodType": "A+",
+                    "percentage": bloodAP
+                },
+                {
+                    "bloodType": "B-",
+                    "percentage": bloodAN
+                },
+                {
+                    "bloodType": "B+",
+                    "percentage": bloodAP
+                }
+            ]).then(res =>{
+                if (res.status === 200) {
+                    
+                    setEditing(false);
+                }else{
+                    console.log(res);
+                }
+            }).catch(err =>{
+                console.error(err.response);
+            }).finally(() => {
+                setLoading(false);
+            })
     }
 
     return(
@@ -63,7 +129,7 @@ export default function Stock(props) {
                         <StyledSlider image={bloodBNIcon} enabled={editing} value={bloodBN} setValue={setBloodBN} />
                         <StyledSlider image={bloodBPIcon} enabled={editing} value={bloodBP} setValue={setBloodBP} />
                     </div>
-                    <div className="profileButton">
+                    <div className="profileButton" style={{marginRight: '50px'}}>
                         {editing ? 
                             <div className="horizontal">
                                 <IconButton

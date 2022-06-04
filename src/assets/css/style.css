@@ -447,7 +447,7 @@ a {
     margin-right: 16px;
 }
 
-.profileData .button img {
+.profileButton .button img {
     margin-right: 8px;
 }
 
@@ -597,7 +597,6 @@ h3 {
 
 .bloodStock .button {
     margin-top: 16px;
-    margin-left: 816px;
     align-self: flex-start;
     width: 128px;
 }
@@ -655,14 +654,14 @@ h3 {
 
 .home-index {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
 }
 
 .map-container {
     width: 100vw;
     height: 100vh;
     padding-bottom: 0;
-    overflow-y:hidden;
+    overflow-y: hidden;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -680,8 +679,7 @@ h3 {
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-  }
-
+}
 
 .circularIconButton img {
     height: 16px;

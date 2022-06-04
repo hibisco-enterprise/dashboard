@@ -276,7 +276,47 @@ function SignUpHospital(){
             apiKitsune.post('/hospitals/register', obj
             ).then(res =>{
                 if (res.status === 201) {
-                    navigate("/hospital/login");
+                    apiKitsune.post('/hospitals/blood/register', {
+                        "documentNumber": cnpj,
+                        "bloodStock": [
+                            {
+                                "bloodType": "O-",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "O+",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "AB-",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "AB+",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "A-",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "A+",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "B-",
+                                "percentage": 0
+                            },
+                            {
+                                "bloodType": "B+",
+                                "percentage": 0
+                            }
+                        ]
+                    }).then(res =>{
+                        navigate("/hospital/login");
+                    }).catch(err =>{
+                        console.error(err.response);
+                    })
                 }else{
                     console.log(res);
                 }
