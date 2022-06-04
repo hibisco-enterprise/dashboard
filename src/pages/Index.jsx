@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useState } from 'react';
 import { MenuDonator } from "../components/Menu";
 import Map, { Marker, Popup } from 'react-map-gl';
-import mapMarker from "../assets/img/map-marker.png";
+// import mapMarker from "../assets/img/elipse.svg";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import axios from 'axios';
 import { apiKitsune } from '../apis';
 
 export default function Index() {
     const [pins, setPins] = useState([]);
+    const [currentPlaceId, setCurrentPlaceId] = useState(1);
     const [viewPort, setViewPort] = useState({
         latitude: -23.555702209472656,
         longitude: -46.659706115722656,
@@ -23,6 +23,7 @@ export default function Index() {
             console.log('data length ' + res.data.length);
 
             for (var i = 0; i < res.data.length; i++) {
+                var idUser = res.data[i].user.idUser;
                 var longitude = res.data[i].user.address.longitude;
                 var latitude = res.data[i].user.address.latitude;
                 var name = res.data[i].user.name;
@@ -30,6 +31,7 @@ export default function Index() {
                 var address = res.data[i].user.address.address
                 var number = res.data[i].user.address.number
                 var objHospital = {
+                    idUser: idUser,
                     name: name,
                     phone: phone,
                     address: address,
@@ -38,7 +40,7 @@ export default function Index() {
                     latitude: latitude
                 }
                 longLatArray.push(objHospital);
-                console.log('latitude and longitude', latitude, longitude, i);
+                console.log('latitude and longitude and id', latitude, longitude, idUser, i);
             }
 
             setPins(longLatArray);
@@ -46,6 +48,13 @@ export default function Index() {
             console.log("Error getting hospitals response " + error)
         );
     }, []);
+
+
+    const handleMarkerClick = (id) => {
+        alert(id);
+        alert(currentPlaceId);
+        setCurrentPlaceId(id);
+    };
 
     return (
         <>
@@ -64,16 +73,22 @@ export default function Index() {
                                         longitude={pins.longitude}
                                         latitude={pins.latitude}
                                         anchor="right"
-                                        color='#F9361B'>
-                                        {/* <img src="./pin.png" /> */}
-                                    </Marker>
-                                    <Popup
-                                        longitude={pins.longitude}
-                                        latitude={pins.latitude}
-                                        anchor="left"
+                                        color='#F9361B'
+                                        onClick={() => handleMarkerClick(pins.idUser)}
                                     >
-                                        <MenuDonator selected="home" />
-                                    </Popup>
+                                        {/* <img src={mapMarker} /> */}
+                                    </Marker>
+                                    {
+                                        pins.idUser === currentPlaceId && (
+                                            <Popup
+                                                longitude={pins.longitude}
+                                                latitude={pins.latitude}
+                                                anchor="left"
+                                                onClose={() => setCurrentPlaceId(null)}
+                                            >
+                                                <MenuDonator selected="home" />
+                                            </Popup>
+                                        )}
                                 </>
                             ))
                         }
