@@ -22,41 +22,6 @@ export default function Modal(props) {
         }
     }
 
-    const bloods = [
-        {
-          "bloodType": "O-",
-          "percentage": 81
-        },
-        {
-          "bloodType": "O+",
-          "percentage": 98
-        },
-        {
-          "bloodType": "AB-",
-          "percentage": 77
-        },
-        {
-          "bloodType": "AB+",
-          "percentage": 57
-        },
-        {
-          "bloodType": "A-",
-          "percentage": 28
-        },
-        {
-          "bloodType": "A+",
-          "percentage": 41
-        },
-        {
-          "bloodType": "B-",
-          "percentage": 28
-        },
-        {
-          "bloodType": "B+",
-          "percentage": 41
-        }
-      ]
-
     return(
 
         <div className="modalBlack">
@@ -79,7 +44,7 @@ export default function Modal(props) {
                     </div>
 
                     <div className="bloodCards">
-                        {bloods.map(blood => (
+                        {props.bloods.map(blood => (
                             <div className="bloodCard">
                                 <img src={bloodLevel(blood.percentage)} alt="" />
                                 <div className="bloodLevel">

@@ -15,6 +15,7 @@ export default function Map() {
         longitude: (localStorage.getItem("user") !== null) ? JSON.parse(localStorage.user).user.address.longitude : -46.659706115722656,
         zoom: 14
     })
+    const [bloods, setBloods] = useState([]);
 
     const [user, setUser] = useState((localStorage.getItem("user") !== null) ? JSON.parse(localStorage.user) : {"idDonator": null,"bloodType":"","user":{"idUser": null,"name":"","email":"","documentNumber":"","phone":"","authenticated": null, "address":{"idAddress": null,"address":"","neighborhood":"","city":"","uf":"","cep":"","number": "","latitude":null,"longitude":null}}});
 
@@ -28,6 +29,7 @@ export default function Map() {
 
             for (var i = 0; i < res.data.length; i++) {
                 var idUser = res.data[i].user.idUser;
+                var idHospital = res.data[i].idHospital;
                 var longitude = res.data[i].user.address.longitude;
                 var latitude = res.data[i].user.address.latitude;
                 var name = res.data[i].user.name;
@@ -38,6 +40,7 @@ export default function Map() {
                 var objHospital = {
                     index: i,
                     idUser: idUser,
+                    idHospital: idHospital,
                     name: name,
                     phone: phone,
                     address: address,
@@ -57,7 +60,14 @@ export default function Map() {
 
 
     const handleMarkerClick = (index) => {
-        setCurrentPin(pins[index])
+        setCurrentPin(pins[index]);
+        apiKitsune.get(`hospitals/blood/${pins[index].idHospital}`).then(res => {
+            if (res.status === 200) {
+                setBloods(res.data);
+            }
+        }).catch(err => {
+            console.log(err.response);
+        })
     };
 
     return (
@@ -71,14 +81,14 @@ export default function Map() {
                         mapStyle="mapbox://styles/mapbox/streets-v9"
                         mapboxAccessToken="pk.eyJ1IjoiaGliaXNjb2VudGVycHJpc2UiLCJhIjoiY2wzMG84c2czMWxxYTNrbnNwanYwZGJobSJ9.EeRJgLtkjLj6ljP5KuesPg">
                         {
-                            pins.map(pins => (
+                            pins.map(pin => (
                                 <>
                                     <Marker
-                                        longitude={pins.longitude}
-                                        latitude={pins.latitude}
+                                        longitude={pin.longitude}
+                                        latitude={pin.latitude}
                                         anchor="right"
                                         color='#F9361B'
-                                        onClick={() => handleMarkerClick(pins.index)}
+                                        onClick={() => handleMarkerClick(pin.index)}
                                     >
                                     </Marker>
                                 </>
@@ -92,6 +102,7 @@ export default function Map() {
                         name={currentPin.name}
                         address={currentPin.address}
                         tel={currentPin.phone}
+                        bloods={bloods}
                         closeFunction = {() => setCurrentPin(null)}
                     /> :
                     <></>}
