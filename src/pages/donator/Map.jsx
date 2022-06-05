@@ -11,10 +11,13 @@ export default function Map() {
     const [pins, setPins] = useState([]);
     const [currentPin, setCurrentPin] = useState(null);
     const [viewPort, setViewPort] = useState({
-        latitude: -23.555702209472656,
-        longitude: -46.659706115722656,
+        latitude: (localStorage.getItem("user") !== null) ? JSON.parse(localStorage.user).user.address.latitude : -23.555702209472656,
+        longitude: (localStorage.getItem("user") !== null) ? JSON.parse(localStorage.user).user.address.longitude : -46.659706115722656,
         zoom: 14
     })
+
+    const [user, setUser] = useState((localStorage.getItem("user") !== null) ? JSON.parse(localStorage.user) : {"idDonator": null,"bloodType":"","user":{"idUser": null,"name":"","email":"","documentNumber":"","phone":"","authenticated": null, "address":{"idAddress": null,"address":"","neighborhood":"","city":"","uf":"","cep":"","number": "","latitude":null,"longitude":null}}});
+
 
     React.useEffect(() => {
         apiKitsune.get("/hospitals").then((res) => {
@@ -29,8 +32,9 @@ export default function Map() {
                 var latitude = res.data[i].user.address.latitude;
                 var name = res.data[i].user.name;
                 var phone = res.data[i].user.phone;
-                var address = res.data[i].user.address.address
-                var number = res.data[i].user.address.number
+                var address = res.data[i].user.address.address;
+                var number = res.data[i].user.address.number;
+                
                 var objHospital = {
                     index: i,
                     idUser: idUser,

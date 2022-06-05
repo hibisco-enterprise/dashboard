@@ -22,6 +22,41 @@ export default function Modal(props) {
         }
     }
 
+    const bloods = [
+        {
+          "bloodType": "O-",
+          "percentage": 81
+        },
+        {
+          "bloodType": "O+",
+          "percentage": 98
+        },
+        {
+          "bloodType": "AB-",
+          "percentage": 77
+        },
+        {
+          "bloodType": "AB+",
+          "percentage": 57
+        },
+        {
+          "bloodType": "A-",
+          "percentage": 28
+        },
+        {
+          "bloodType": "A+",
+          "percentage": 41
+        },
+        {
+          "bloodType": "B-",
+          "percentage": 28
+        },
+        {
+          "bloodType": "B+",
+          "percentage": 41
+        }
+      ]
+
     return(
 
         <div className="modalBlack">
@@ -44,14 +79,16 @@ export default function Modal(props) {
                     </div>
 
                     <div className="bloodCards">
-                        <div className="bloodCard">
-                            <img src={bloodLevel(84)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>O-</h3>
-                                <h4>84%</h4>
+                        {bloods.map(blood => (
+                            <div className="bloodCard">
+                                <img src={bloodLevel(blood.percentage)} alt="" />
+                                <div className="bloodLevel">
+                                    <h3>{blood.bloodType}</h3>
+                                    <h4>{blood.percentage}%</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div className="bloodCard">
+                        ))}
+                        {/* <div className="bloodCard">
                             <img src={bloodLevel(35)} alt="" />
                             <div className="bloodLevel">
                                 <h3>AB-</h3>
@@ -99,7 +136,7 @@ export default function Modal(props) {
                                 <h3>B+</h3>
                                 <h4>35%</h4>
                             </div>
-                        </div>  
+                        </div>   */}
                     </div>
                 </div>
             </div>
