@@ -25,10 +25,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "install": "npm install --legacy-peer-deps",
-    "i": "npm install --legacy-peer-deps",
-    "dev": "react-scripts start",
+    "i": "npm install --legacy-peer-reps",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
