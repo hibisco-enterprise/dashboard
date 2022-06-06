@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useLayoutEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { MenuDonator } from "../../components/Menu";
 import { Input } from "../../components/Input";
 import TimeLock from "../../components/TimeLock";
@@ -7,6 +8,8 @@ import Loading from "../../components/Loading";
 import {apiKitsune} from '../../apis';
 
 export default function Requests(props) {
+
+    const navigate = useNavigate();
     
     let tomorrow = new Date();
     tomorrow.setHours(tomorrow.getHours() + 3);
@@ -21,14 +24,15 @@ export default function Requests(props) {
     const [hours, setHours] = useState([]);
 
     useLayoutEffect(() => {
-        apiKitsune.get(`/hospitals/appointment/${user.idHospital}`
+        setLoading(true);
+        apiKitsune.get(`hospitals/appointments/${sessionStorage.getItem('idHospitalSchedule')}/order-date`
         ).then(res => {
             if (res.status === 200) setDays(res.data);
-            console.log(res.data);
         }).catch(err => {
             console.error(err);
         }).finally(() => {
             setDate(tomorrow);
+            setLoading(false);
         })
     }, [])
 
@@ -43,7 +47,7 @@ export default function Requests(props) {
     function existDate() {
         for (let index = 0; index < days.length; index++) {
             const dayData = days[index];
-            let dia = new Date(dayData.day);
+            let dia = new Date(dayData.dhAppointment);
             dia.setHours(dia.getHours() - 3);
             if (dia.toISOString().slice(0,10) === date) return true;
         }
@@ -64,7 +68,7 @@ export default function Requests(props) {
                 horas.push({
                     "index": i,
                     "hour": day.toISOString().slice(11, 16), 
-                    "available": day.toISOString().slice(11, 16) == new Date(dayData).toISOString().slice(11, 16)
+                    "available": true
                 });    
                 i++
             }
@@ -73,34 +77,21 @@ export default function Requests(props) {
             for (let index = 0; index < days.length; index++) {
                 let dayData = days[index];
                 // let horas = [];
-                if (new Date(dayData.day).toISOString().slice(0,10) === date) {
+                if (new Date(dayData.dhAppointment).toISOString().slice(0,10) === date) {
                     let day = new Date(date);
                     day.setHours(day.getHours() + 3);
-                    if (day.toISOString().slice(0,10) === tomorrow) {
-                        let hojeAgora = new Date();
-                        day.setHours(hojeAgora.getHours());
-                        if (hojeAgora.getMinutes() >= 45) {
-                            day.setHours(day.getHours() + 1)
-                        } else if (hojeAgora.getMinutes() >= 30) {
-                            day.setMinutes(45)
-                        } else if (hojeAgora.getMinutes() >= 15) {
-                            day.setMinutes(30)
-                        } else {
-                            day.setMinutes(15)
-                        }
-                    } else {
-                        day.setHours(8)
-                    }
+                    day.setHours(8);
                     day.setHours(day.getHours() - 3);
                     for (day; day.getHours() < 13; day.setMinutes(day.getMinutes() + 15)) {
-                        dayData = days[index]
-                        let dia = new Date(dayData.day);
+                        if (index >= days.length) index--;
+                        dayData = days[index];
+                        let dia = new Date(dayData.dhAppointment);
                         dia.setHours(dia.getHours() - 3);
                         if (day.toISOString().slice(11, 16) == dia.toISOString().slice(11, 16)) {
                             horas.push({
                                 "index": i,
                                 "hour": day.toISOString().slice(11, 16), 
-                                "available": true
+                                "available": false
                             });
                             index++
                         } else {
@@ -120,20 +111,24 @@ export default function Requests(props) {
         }
     }
 
-    function agendar(index, hour, can) {
-        if (can) {
-            apiKitsune.post(`hospitals/appointment/${user.idHospital}`, {
-                "days": [
-                    `${date} ${hour}:00`
-                ]
+    function agendar(index, hour, cannot) {
+        if (!cannot) {
+            setLoading(true)
+            apiKitsune.post(`donators/appointment`, {
+                "dhAppointment": `${date} ${hour}:00`,
+                "fkDonator": user.idDonator,
+                "fkHospital": sessionStorage.getItem('idHospitalSchedule')
             }).then(res => {
-                if (res.status === 201){
-                    let arrayHoras = hours;
-                    arrayHoras[index].available = true;
-                    setHours(arrayHoras);
-                } 
+                let arrayHoras = hours;
+                arrayHoras[index].available = false;
+                setHours(arrayHoras);
+                alert("Horário agendado com sucesso. Aguarde que o hospital aceite a sua solicitação.")
+                navigate("/donator/map");
+                
             }).catch(err => {
                 console.error(err.response);
+            }).finally(() => {
+                setLoading(false);
             })
         } else {
             alert("Este horário não está disponível, solicite outro.")

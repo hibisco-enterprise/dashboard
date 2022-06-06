@@ -157,10 +157,10 @@ function MenuHospital(props) {
                         <img src={(props.selected !== "stock") ? bloodtypeIcon : bloodtypeSelectedIcon} alt="Stock Icon" />
                         <p>Estoque</p>
                     </div>
-                    <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/history")}>
+                    {/* <div className={(props.selected !== "history") ? "menuOption" : "menuOption menuOptionSelected"} onClick={() => navigate("/hospital/history")}>
                         <img src={(props.selected !== "history") ? historyIcon : historySelectedIcon} alt="History Icon" />
                         <p>Histórico</p>
-                    </div>
+                    </div> */}
 
                     {/* <div className="menuSeparatorLine"/>
 

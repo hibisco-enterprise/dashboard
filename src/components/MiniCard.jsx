@@ -6,12 +6,12 @@ import declineIcon from "../assets/img/decline-icon.svg";
 function CardDonation(props){
 
     return (
-        <div className="minicard">
+        <div className="minicard" style={{justifyContent: 'flex-start'}}>
             <div>
                 <p>{props.date}<br/>
                 {props.hour}</p>
             </div>
-            <div>
+            <div style={{marginLeft: '24px'}}>
                 <h4>{props.locale}</h4>
             </div>
         </div>
@@ -24,7 +24,7 @@ function CardDonator(props){
     return (
         <div className="minicard">
             <div style={{display: 'flex', alignItems: 'center'}}>
-                <img src={props.photo} alt="Donator Photo" />
+                <img src={props.photo == undefined ? "https://cdn-icons-png.flaticon.com/512/1080/1080207.png" : props.photo} alt="Donator Photo" />
                 <div>
                     <h4>{props.name}</h4>
                     <span>{props.bloodType}</span>
@@ -43,7 +43,7 @@ function CardRequest(props) {
     return (
         <div className="minicard">
             <div style={{display: 'flex', alignItems: 'center'}}>
-                <img src={props.photo} alt="Donator Photo" />
+                <img src={props.photo == undefined ? "https://cdn-icons-png.flaticon.com/512/1080/1080207.png" : props.photo} alt="Donator Photo" />
                 <div>
                     <h4>{props.name}</h4>
                     <span>{props.date} - {props.hour}</span>

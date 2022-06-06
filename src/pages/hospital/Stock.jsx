@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {MenuHospital} from "../../components/Menu";
-import StyledChart from "../../components/StyledCharts";
 import StyledSlider from "../../components/StyledSlider"
 import {IconButton} from "../../components/Button";
+import {Input} from "../../components/Input";
 import Loading from "../../components/Loading";
 
 import bloodONIcon from "../../assets/img/blood-o-n.svg"
@@ -17,8 +17,9 @@ import bloodBPIcon from "../../assets/img/blood-b-p.svg"
 import pencilIcon from "../../assets/img/pencil.svg"
 import diskIcon from "../../assets/img/disk.svg"
 import trashIcon from "../../assets/img/trash.svg"
+import uploadIcon from "../../assets/img/upload.svg"
 
-import { apiKitsune } from '../../apis';
+import { apiKitsune, apiKitsuneText } from '../../apis';
 
 
 export default function Stock(props) {
@@ -37,7 +38,10 @@ export default function Stock(props) {
     const [bloodBN, setBloodBN] = useState(0);
     const [bloodBP, setBloodBP] = useState(0);
 
+    const [file, setFile] = useState();
+
     useEffect(() => {
+        setLoading(true);
         apiKitsune.get(`/hospitals/blood/${user.idHospital}`
         ).then(res => {
             if (res.status === 200) {
@@ -53,8 +57,24 @@ export default function Stock(props) {
             }
         }).catch(err => {
             console.error(err);
+        }).finally(() => {
+            setLoading(false);
         })
     }, []);
+
+    // useEffect(() => {
+    //     if (file != undefined) {
+    //         setLoading(true);
+    //         apiKitsune.post("hospitals/importacao-txt", file
+    //         ).then(res => {
+    //             console.log("penis");
+    //         }).catch(err => {
+    //             console.error(err.response);
+    //         }).finally(() => {
+    //             setLoading(false);
+    //         })
+    //     }
+    // }, [file])
 
     function editStock(){
         setEditing(true);
@@ -93,11 +113,11 @@ export default function Stock(props) {
                 },
                 {
                     "bloodType": "B-",
-                    "percentage": bloodAN
+                    "percentage": bloodBN
                 },
                 {
                     "bloodType": "B+",
-                    "percentage": bloodAP
+                    "percentage": bloodBP
                 }
             ]).then(res =>{
                 if (res.status === 200) {
@@ -146,12 +166,16 @@ export default function Stock(props) {
                                 />
                             </div>
                             : 
-                            <IconButton
-                                id="btnEditStock" 
-                                icon={pencilIcon} 
-                                label="Editar"
-                                eventClick={() => editStock()}
-                            />
+                            <div className="horizontal">
+                                <input type="file" name="file" id="file" className="inputfile" value={file} onChange={e => setFile(e.target.value)}/>
+                                <label htmlFor="file"><img src={uploadIcon} style={{marginRight: '8px'}} /> Selecione um arquivo</label>
+                                <IconButton
+                                    id="btnEditStock" 
+                                    icon={pencilIcon} 
+                                    label="Editar"
+                                    eventClick={() => editStock()}
+                                />
+                            </div>
                         }
                     </div>
                 </div>
