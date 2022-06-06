@@ -25,6 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "build": "webpack --config prod.config.js",
     "start": "react-scripts start",
     "i": "install --legacy-peer-deps",
     "ci": "echo install --legacy-peer-deps ci",
@@ -43,18 +44,10 @@
       "react-app/jest"
     ]
   },
-    "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all",
-        "not chrome < 51",
-        "not safari < 10"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
-    }
+  "browserslist": {
+    "production": [
+      "defaults",
+      "not ie 11"
+    ]
   }
+}
