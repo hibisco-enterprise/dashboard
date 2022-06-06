@@ -6,6 +6,7 @@ import MapBox, { Marker, Popup } from 'react-map-gl';
 // import mapMarker from "../assets/img/elipse.svg";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { apiKitsune } from '../../apis';
+import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
 
 export default function Map() {
     const [pins, setPins] = useState([]);
@@ -16,9 +17,8 @@ export default function Map() {
         zoom: 14
     })
     const [bloods, setBloods] = useState([]);
-
     const [user, setUser] = useState((localStorage.getItem("user") !== null) ? JSON.parse(localStorage.user) : {"idDonator": null,"bloodType":"","user":{"idUser": null,"name":"","email":"","documentNumber":"","phone":"","authenticated": null, "address":{"idAddress": null,"address":"","neighborhood":"","city":"","uf":"","cep":"","number": "","latitude":null,"longitude":null}}});
-
+    MapBox.workerClass = MapboxWorker;
 
     React.useEffect(() => {
         apiKitsune.get("/hospitals").then((res) => {
