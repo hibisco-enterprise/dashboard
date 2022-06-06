@@ -26,8 +26,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "i": "echo default install",
-    "ci": "echo default install ci",
+    "i": "install --legacy-peer-deps",
+    "ci": "echo install --legacy-peer-deps ci",
     "install": "echo default install",
     "heroku-prebuild": "npm install --legacy-peer-deps",
     "heroku-postbuild": "react-scripts start",
