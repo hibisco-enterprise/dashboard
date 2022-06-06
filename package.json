@@ -26,6 +26,8 @@
   },
   "scripts": {
     "start": "node server.js",
+    "install": "npm install --legacy-peer-deps",
+    "i": "npm install --legacy-peer-deps",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
