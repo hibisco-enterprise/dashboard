@@ -26,8 +26,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "install": "npm install --legacy-peer-deps",
-    "i": "npm install --legacy-peer-deps",
     "heroku-prebuild": "npm install --legacy-peer-deps",
     "heroku-postbuild": "echo This runs after Heroku installs dependencies, but before Heroku prunes and caches dependencies.",
     "heroku-cleanup": "echo This runs after Heroku prunes and caches dependencies.",
