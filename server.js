@@ -1,1 +1,1 @@
-console.log("desgraça maldição demonios eu odeio a vida ")
+console.log("Teste iniciar a aplicação.")
