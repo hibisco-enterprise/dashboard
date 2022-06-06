@@ -447,7 +447,7 @@ a {
     margin-right: 16px;
 }
 
-.profileButton .button img {
+.iconButton img {
     margin-right: 8px;
 }
 
@@ -629,7 +629,7 @@ h3 {
 }
 
 .modalLocalPhoto {
-    background: url("https://www.pc.rs.gov.br/upload/recortes/202201/21121934_439618_GD.jpg");
+    background: url("https://www.creativefabrica.com/wp-content/uploads/2020/03/08/hospital-icon-Graphics-3386846-1.jpg");
     max-width: 432px;
     height: calc(432px * 9 / 16);
     background-size: cover;
@@ -715,6 +715,30 @@ h3 {
     margin-left: 8px;
 }
 
+.modalText .modalButtons {
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.modalText .button {
+    width: 192px;
+}
+
+.modalText .button p {
+    color: #FFFFFF;
+}
+
+#btnScheduleDonation {
+    height: 30px;
+    width: 190px;
+    border: 1px solid #8060F3;
+    background-color: #FFFFFF;
+}
+
+#btnScheduleDonation p {
+    color: #8060F3;
+}
+
 .bloodCards {
     display: flex;
     align-items: center;
@@ -762,6 +786,7 @@ h3 {
     align-items: center;
     justify-content: center;
     width: 94px;
+    max-width: 94px;
     height: 56px;
     background-color: rgb(149, 149, 149, 0.1);
     border-radius: 4px;
@@ -775,7 +800,8 @@ h3 {
 }
 
 .availableTime img {
-    position: absolute;
-    margin-left: 32px;
+    /* position: absolute; */
+    margin-left: 4px;
+    margin-right: -23px;
     padding-bottom: 28px;
 }

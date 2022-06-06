@@ -9,6 +9,7 @@ import Map from "./pages/donator/Map"
 import Profile from "./pages/donator/Profile"
 import HistoryDonator from "./pages/donator/History"
 import FAQ from "./pages/donator/FAQ"
+import Schedule from "./pages/donator/Schedule"
 
 import LoginHospital from "./pages/hospital/Login"
 import SignUpHospital from "./pages/hospital/SignUp"
@@ -29,6 +30,7 @@ export default function RoutesComponent() {
                 <Route path="/donator/profile" element={<Profile/>}/>
                 <Route path="/donator/history" element={<HistoryDonator/>}/>
                 <Route path="/donator/faq" element={<FAQ/>}/>
+                <Route path="/donator/schedule" element={<Schedule/>}/>
 
                 <Route path="/hospital/login" element={<LoginHospital/>}/>
                 <Route path="/hospital/signup" element={<SignUpHospital/>}/>

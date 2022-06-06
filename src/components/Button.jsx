@@ -11,7 +11,7 @@ function CardButton(props) {
 function IconButton(props) {
     return(
         <>
-            <div className="button" id={props.id} onClick={props.eventClick}>
+            <div className="button iconButton" id={props.id} onClick={props.eventClick}>
                 <img src={props.icon} alt="Icon" /><p>{props.label}</p>
             </div>
         </>

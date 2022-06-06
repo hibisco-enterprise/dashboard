@@ -21,6 +21,7 @@ export default function Profile() {
 
     const [nameView, setNameView] = useState(user.user.name);
     const [emailView, setEmailView] = useState(user.user.email);
+    const [photo, setPhoto] = useState();
 
     const [name, setName] = useState(user.user.name);
     const [email, setEmail] = useState(user.user.email);
@@ -230,7 +231,7 @@ export default function Profile() {
             <div className="section">
                 <h1>Perfil</h1>
                     <div>
-                        <ProfileViewer photo="https://c-fa.cdn.smule.com/rs-s53/arr/c9/14/da9882b3-c024-4a6f-bb94-f7efcb3e05c7_256.jpg" name={nameView} email={emailView}/>
+                        <ProfileViewer photo={photo} name={nameView} email={emailView}/>
                     </div>
                     <div style={{marginBottom: '32px'}}>
                         <h2>Dados</h2>

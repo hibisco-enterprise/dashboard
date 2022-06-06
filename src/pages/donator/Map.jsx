@@ -100,8 +100,9 @@ export default function Map() {
                     <Modal
                         photo="https://www.pc.rs.gov.br/upload/recortes/202201/21121934_439618_GD.jpg"
                         name={currentPin.name}
-                        address={currentPin.address}
+                        address={`${currentPin.address}, ${currentPin.number}`}
                         tel={currentPin.phone}
+                        idHospital={currentPin.idHospital}
                         bloods={bloods}
                         closeFunction = {() => setCurrentPin(null)}
                     /> :

@@ -1,4 +1,8 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+import { IconButton } from './Button';
+
+import { apiKitsune } from '../apis';
 
 import closeIcon from '../assets/img/close.svg';
 
@@ -9,8 +13,13 @@ import lowLevel from "../assets/img/low-level-blood.svg"
 import mediumLevel from "../assets/img/medium-level-blood.svg"
 import highLevel from "../assets/img/high-level-blood.svg"
 
+import calendar from "../assets/img/calendar.svg"
+import download from "../assets/img/download.svg"
+
 
 export default function Modal(props) {
+
+    const navigate = useNavigate();
 
     function bloodLevel(percent) {
         if (percent > 80) {
@@ -20,6 +29,30 @@ export default function Modal(props) {
         } else {
             return lowLevel;
         }
+    }
+
+    function redirect(id) {
+        sessionStorage.setItem("idHospitalSchedule", id)
+        navigate("/donator/schedule");
+    }
+
+    function downloadData(id) {
+        apiKitsune.get(`/donators/report/${id}`
+        ).then(res => {
+            if (res.status === 200) {
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:attachment/text,' + encodeURI(res.data);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = 'hospital.txt';
+                hiddenElement.click();
+                console.log("Documento baixado.")
+            } else {
+                console.log(res);
+            } 
+                
+        }).catch(err => {
+            console.error(err);
+        })
     }
 
     return(
@@ -53,55 +86,20 @@ export default function Modal(props) {
                                 </div>
                             </div>
                         ))}
-                        {/* <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>AB-</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>
-                        <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>A-</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>
-                        <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>B-</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>
-                        <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>O+</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>
-                        <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>AB+</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>
-                        <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>A+</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>
-                        <div className="bloodCard">
-                            <img src={bloodLevel(35)} alt="" />
-                            <div className="bloodLevel">
-                                <h3>B+</h3>
-                                <h4>35%</h4>
-                            </div>
-                        </div>   */}
+                    </div>
+                    <div className="horizontal modalButtons">
+                        <IconButton
+                            id="btnScheduleDonation" 
+                            icon={calendar} 
+                            label="Agendar Doação"
+                            eventClick={() => redirect(props.idHospital)}
+                        />
+                        <IconButton
+                            id="btnDownloadHospitalData" 
+                            icon={download} 
+                            label="Baixar Dados"
+                            eventClick={() => downloadData(props.idHospital)}
+                        />
                     </div>
                 </div>
             </div>

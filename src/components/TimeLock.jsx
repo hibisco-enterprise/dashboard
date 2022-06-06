@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import lockOpen from "../assets/img/lock-open.svg"
 import lockClosed from "../assets/img/lock-closed.svg"
@@ -7,9 +7,9 @@ export default function TimeLock(props) {
 
     return(
 
-        <div className="availableTime">
-            <img src={props.available ? lockOpen : lockClosed} />
+        <div className="availableTime" onClick={props.eventClick}>
             <span>{props.hour}</span>
+            <img src={props.available ? lockOpen : lockClosed} />
         </div>
 
     )
