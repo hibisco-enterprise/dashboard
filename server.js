@@ -1,0 +1,1 @@
+console.log("desgraça maldição demonios eu odeio a vida ")
