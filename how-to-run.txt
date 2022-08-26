@@ -1,0 +1,7 @@
+Para rodar dev, execute o comando: 
+docker-compose -f docker-compose.dev.yml up -d --build
+
+para rodar prod, execute o comando: 
+docker-compose -f docker-compose.prod.yml build -d
+e após rodar, executar: 
+docker run -p 80:80 --name react-app dashboard-prod

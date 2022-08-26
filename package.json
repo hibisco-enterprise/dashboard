@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "build": "webpack --config prod.config.js",
+    "build": "react-scripts build",
     "start": "react-scripts start",
     "i": "install --legacy-peer-deps",
     "ci": "echo install --legacy-peer-deps ci",
@@ -34,7 +34,6 @@
     "heroku-prebuild": "npm install --legacy-peer-deps",
     "heroku-postbuild": "react-scripts start",
     "heroku-cleanup": "echo This runs after Heroku prunes and caches dependencies.",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
