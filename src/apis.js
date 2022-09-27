@@ -9,7 +9,7 @@ const apiViaCep = axios.create({
 })
 
 const apiKitsune = axios.create({
-    baseURL: "https://hibisco-ws.azurewebsites.net/",
+    baseURL: "http://100.24.239.211:8080/",
     headers: {
         'Access-Control-Allow-Origin': '*',
         "Content-Type": "application/json;charset=UTF-8"
