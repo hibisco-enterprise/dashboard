@@ -6,7 +6,6 @@ services:
     image: dashboard-dev
     build:
       context: .
-      dockerfile: ./dev/Dockerfile
       target: development
     volumes:
       - ./src:/app/src
