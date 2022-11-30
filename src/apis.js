@@ -9,7 +9,7 @@ const apiViaCep = axios.create({
 })
 
 const apiKitsune = axios.create({
-    baseURL: "https://kitsunews.hopto.org/",
+    baseURL: "https://kitsune-ws.hopto.org",
     headers: {
         'Access-Control-Allow-Origin': '*',
         "Content-Type": "application/json;charset=UTF-8"
